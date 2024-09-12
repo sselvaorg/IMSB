@@ -43,4 +43,9 @@ public class MessageController {
         return ResponseEntity.ok(messageService.MarkAsRead(id));
 
     }
+
+    @GetMapping("CountRead")
+    public ResponseEntity<Long> CountRead() {
+        return ResponseEntity.ok(messageService.CountReadMessages());
+    }
 }
