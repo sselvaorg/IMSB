@@ -38,4 +38,10 @@ public class MessageService implements IMessageService {
     public Message GetMessageById(Long Id) {
         return messageRepository.findById(Id).orElseThrow();
     }
+
+    @Override
+    public long CountReadMessages() {
+        return messageRepository.countByEstLu(false);
+
+    }
 }

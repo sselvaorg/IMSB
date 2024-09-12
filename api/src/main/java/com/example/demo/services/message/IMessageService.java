@@ -12,4 +12,6 @@ public interface IMessageService {
     Message MarkAsRead(Long Id);
 
     Message GetMessageById(Long Id);
+
+    long CountReadMessages();
 }

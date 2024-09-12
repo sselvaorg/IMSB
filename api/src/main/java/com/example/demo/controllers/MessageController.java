@@ -39,7 +39,7 @@ public class MessageController {
     }
 
     @PutMapping("MarkAsRead/{id}")
-    public ResponseEntity<Message> putMethodName(@PathVariable Long id) {
+    public ResponseEntity<Message> MarkAsRead(@PathVariable Long id) {
         return ResponseEntity.ok(messageService.MarkAsRead(id));
 
     }
