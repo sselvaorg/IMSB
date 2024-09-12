@@ -7,6 +7,7 @@ import AddCategoryModal, {
 } from "../../Components/AddCategoryModal/AddCategoryModal";
 import SuccessDialog from "../../Components/SuccessDialog/SuccessDialog";
 import ErrorDialog from "../../Components/ErrorDialog/ErrorDialog";
+import TableSkeleton from "../../Components/TableSkeleton/TableSkeleton";
 
 type Props = {};
 
@@ -15,10 +16,18 @@ const CategoriePage = (props: Props) => {
   const [showError, setShowError] = useState(false);
   const [isModalOpen, setModalOpen] = useState<boolean>(false);
   const [categories, setCategories] = useState<Categorie[]>([]);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
   useEffect(() => {
     const GetAllCategories = async () => {
-      const results = await AllCategories();
-      setCategories(results);
+      try {
+        setIsLoading(true); // Set loading to true before fetching
+        const results = await AllCategories();
+        setCategories(results);
+      } catch (error) {
+        console.error("Failed to fetch categories:", error);
+      } finally {
+        setIsLoading(false); // Set loading to false after fetching
+      }
     };
     GetAllCategories();
   }, []);
@@ -53,7 +62,11 @@ const CategoriePage = (props: Props) => {
               Ajouter Categorie
             </button>
           </div>
-          <CategorieTable categories={categories}></CategorieTable>
+          {isLoading ? (
+            <TableSkeleton isLoading={isLoading}></TableSkeleton>
+          ) : (
+            <CategorieTable categories={categories}></CategorieTable>
+          )}
         </div>
       </div>
       {isModalOpen && (

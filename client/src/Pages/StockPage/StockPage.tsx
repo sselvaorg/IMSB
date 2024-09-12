@@ -7,6 +7,7 @@ import AddArticleModal, {
 } from "../../Components/AddArticleModal/AddArticleModal";
 import SuccessDialog from "../../Components/SuccessDialog/SuccessDialog";
 import ErrorDialog from "../../Components/ErrorDialog/ErrorDialog";
+import TableSkeleton from "../../Components/TableSkeleton/TableSkeleton";
 
 type Props = {};
 
@@ -15,10 +16,14 @@ const StockPage = (props: Props) => {
   const [showError, setShowError] = useState(false);
   const [isModalOpen, setModalOpen] = useState<boolean>(false);
   const [articles, setArticles] = useState<Article[]>([]);
+  const [isLoading, setLoading] = useState<boolean>(true);
+
   useEffect(() => {
     const GetAllArticles = async () => {
+      setLoading(true);
       const results = await AllArticles();
       setArticles(results);
+      setLoading(false);
     };
     GetAllArticles();
   }, []);
@@ -53,7 +58,11 @@ const StockPage = (props: Props) => {
             Ajouter Article
           </button>
         </div>
-        <ArticleTable articles={articles}></ArticleTable>
+        {isLoading ? (
+          <TableSkeleton isLoading={isLoading}></TableSkeleton>
+        ) : (
+          <ArticleTable articles={articles}></ArticleTable>
+        )}
       </div>
       <AddArticleModal
         isOpen={isModalOpen}

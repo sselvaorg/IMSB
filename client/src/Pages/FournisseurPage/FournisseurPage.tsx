@@ -7,6 +7,7 @@ import ErrorDialog from "../../Components/ErrorDialog/ErrorDialog";
 import AddFournisseurModal, {
   AddFournisseurDto,
 } from "../../Components/AddFournisseurModal/AddFournisseurModal";
+import TableSkeleton from "../../Components/TableSkeleton/TableSkeleton";
 
 type Props = {};
 
@@ -15,6 +16,8 @@ const FournisseurPage = (props: Props) => {
   const [showSuccess, setShowSuccess] = useState(false);
   const [showError, setShowError] = useState(false);
   const [isModalOpen, setModalOpen] = useState<boolean>(false);
+  const [isLoading, setLoading] = useState<boolean>(true);
+
   const CloseModal = async (addFournisseurDto?: AddFournisseurDto) => {
     setModalOpen(false);
     if (addFournisseurDto) {
@@ -35,8 +38,10 @@ const FournisseurPage = (props: Props) => {
   };
   useEffect(() => {
     const GetAllFournisseurs = async () => {
+      setLoading(true);
       const results = await AllFournisseurs();
       setFournisseurs(results);
+      setLoading(false);
     };
     GetAllFournisseurs();
   }, []);
@@ -54,7 +59,11 @@ const FournisseurPage = (props: Props) => {
             Declarer Fournisseur
           </button>
         </div>
-        <FournisseurTable fournisseurs={fournisseurs}></FournisseurTable>
+        {isLoading ? (
+          <TableSkeleton isLoading={isLoading}></TableSkeleton>
+        ) : (
+          <FournisseurTable fournisseurs={fournisseurs}></FournisseurTable>
+        )}
       </div>
       {isModalOpen && (
         <AddFournisseurModal

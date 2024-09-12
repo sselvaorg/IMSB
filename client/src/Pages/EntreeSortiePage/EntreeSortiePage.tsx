@@ -14,6 +14,7 @@ import AddEntreeStockModal, {
 import AddSortieStockModal, {
   AddSortieStockDto,
 } from "../../Components/AddSortieStockModal/AddSortieStockModal";
+import TableSkeleton from "../../Components/TableSkeleton/TableSkeleton";
 
 type Props = {};
 
@@ -43,10 +44,14 @@ const EntreeSortiePage = (props: Props) => {
   const [showError, setShowError] = useState<boolean>(false);
   const [isEntreeModalOpen, setEntreeModalOpen] = useState<boolean>(false);
   const [isSortieModalOpen, setSortieModalOpen] = useState<boolean>(false);
+  const [isLoading, setLoading] = useState<boolean>(true);
+
   useEffect(() => {
     const GetAllIoOperations = async () => {
+      setLoading(true);
       const response = await GetAllIOStock();
       setIoStock(response);
+      setLoading(false);
     };
 
     GetAllIoOperations();
@@ -127,7 +132,11 @@ const EntreeSortiePage = (props: Props) => {
               Signaler Sortie
             </button>
           </div>
-          <FluxTable iOStock={ioStock}></FluxTable>
+          {isLoading ? (
+            <TableSkeleton isLoading={isLoading}></TableSkeleton>
+          ) : (
+            <FluxTable iOStock={ioStock}></FluxTable>
+          )}
         </div>
       </div>
       {showSuccess && (
