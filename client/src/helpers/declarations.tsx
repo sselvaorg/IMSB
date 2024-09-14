@@ -51,3 +51,10 @@ export interface Stats {
   nombreCategorie: number;
   stockEpuisee: number;
 }
+export interface Message {
+  id: number;
+  contenu: string;
+  titre: string;
+  estLu: boolean;
+  createdAt: Date;
+}
