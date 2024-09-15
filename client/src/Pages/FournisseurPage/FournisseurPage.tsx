@@ -1,13 +1,16 @@
 import React, { useEffect, useState } from "react";
 import FournisseurTable from "../../Components/FournisseurTable/FournisseurTable";
 import { Fournisseur } from "../../helpers/declarations";
-import { AllFournisseurs, CreateFournisseur } from "../../api/api";
 import SuccessDialog from "../../Components/SuccessDialog/SuccessDialog";
 import ErrorDialog from "../../Components/ErrorDialog/ErrorDialog";
 import AddFournisseurModal, {
   AddFournisseurDto,
 } from "../../Components/AddFournisseurModal/AddFournisseurModal";
 import TableSkeleton from "../../Components/TableSkeleton/TableSkeleton";
+import {
+  CreateFournisseur,
+  AllFournisseurs,
+} from "../../Services/FournisseurService";
 
 type Props = {};
 

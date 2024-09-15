@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import ArticleTable from "../../Components/ArticleTable/ArticleTable";
-import { AllArticles, CreateArticle } from "../../api/api";
 import { Article } from "../../helpers/declarations";
 import AddArticleModal, {
   AddArticleDto,
@@ -8,6 +7,7 @@ import AddArticleModal, {
 import SuccessDialog from "../../Components/SuccessDialog/SuccessDialog";
 import ErrorDialog from "../../Components/ErrorDialog/ErrorDialog";
 import TableSkeleton from "../../Components/TableSkeleton/TableSkeleton";
+import { AllArticles, CreateArticle } from "../../Services/ArticleService";
 
 type Props = {};
 

@@ -3,8 +3,8 @@ import AreaCharts from "../../Components/AreaCharts/AreaCharts";
 import PieCharts from "../../Components/PieCharts/PieCharts";
 import RadialBar from "../../Components/RadialBar/RadialBar";
 import { Stats } from "../../helpers/declarations";
-import { GetDashboardStats } from "../../api/api";
 import ItemSkeleton from "../../Components/ItemSkeleton/ItemSkeleton";
+import { GetDashboardStats } from "../../Services/ChartsService";
 
 type Props = {};
 

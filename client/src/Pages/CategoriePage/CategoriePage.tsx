@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from "react";
 import CategorieTable from "../../Components/CategoryTable/CategorieTable";
 import { Categorie } from "../../helpers/declarations";
-import { AllCategories, CreateCategory } from "../../api/api";
+
 import AddCategoryModal, {
   AddCategorieDto,
 } from "../../Components/AddCategoryModal/AddCategoryModal";
 import SuccessDialog from "../../Components/SuccessDialog/SuccessDialog";
 import ErrorDialog from "../../Components/ErrorDialog/ErrorDialog";
 import TableSkeleton from "../../Components/TableSkeleton/TableSkeleton";
+import { AllCategories, CreateCategory } from "../../Services/CategorieService";
 
 type Props = {};
 

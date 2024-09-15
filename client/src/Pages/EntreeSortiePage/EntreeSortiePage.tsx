@@ -1,11 +1,7 @@
 import React, { useEffect, useState } from "react";
 import FluxTable from "../../Components/FluxTable/FluxTable";
 import { EntreeStock, IOStock, SortieStock } from "../../helpers/declarations";
-import {
-  CreateEntreeStock,
-  CreateSortieStock,
-  GetAllIOStock,
-} from "../../api/api";
+
 import SuccessDialog from "../../Components/SuccessDialog/SuccessDialog";
 import ErrorDialog from "../../Components/ErrorDialog/ErrorDialog";
 import AddEntreeStockModal, {
@@ -15,6 +11,11 @@ import AddSortieStockModal, {
   AddSortieStockDto,
 } from "../../Components/AddSortieStockModal/AddSortieStockModal";
 import TableSkeleton from "../../Components/TableSkeleton/TableSkeleton";
+import {
+  CreateEntreeStock,
+  CreateSortieStock,
+  GetAllIOStock,
+} from "../../Services/IOService";
 
 type Props = {};
 
