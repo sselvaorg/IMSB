@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { Categorie, Fournisseur } from "../../helpers/declarations";
-import { AllCategories, AllFournisseurs } from "../../api/api";
 import { BarcodeScanner } from "@thewirv/react-barcode-scanner";
+import { AllCategories } from "../../Services/CategorieService";
+import { AllFournisseurs } from "../../Services/FournisseurService";
 interface ModalProps {
   isOpen: boolean;
   onClose: (data?: AddArticleDto) => void; // A function type that takes no arguments and returns void

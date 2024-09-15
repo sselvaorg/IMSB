@@ -58,3 +58,7 @@ export interface Message {
   estLu: boolean;
   createdAt: Date;
 }
+export interface AuthToken {
+  accessToken: string;
+  tokenType: string;
+}

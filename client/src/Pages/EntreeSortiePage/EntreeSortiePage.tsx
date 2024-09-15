@@ -16,6 +16,7 @@ import {
   CreateSortieStock,
   GetAllIOStock,
 } from "../../Services/IOService";
+import { showErrorModal, showSuccessModal } from "../../helpers/handlers";
 
 type Props = {};
 
@@ -41,8 +42,7 @@ const EntreeSortiePage = (props: Props) => {
     };
   };
   const [ioStock, setIoStock] = useState<IOStock[]>([]);
-  const [showSuccess, setShowSuccess] = useState<boolean>(false);
-  const [showError, setShowError] = useState<boolean>(false);
+
   const [isEntreeModalOpen, setEntreeModalOpen] = useState<boolean>(false);
   const [isSortieModalOpen, setSortieModalOpen] = useState<boolean>(false);
   const [isLoading, setLoading] = useState<boolean>(true);
@@ -72,7 +72,7 @@ const EntreeSortiePage = (props: Props) => {
               (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
             )
           );
-          setShowSuccess(true);
+          showSuccessModal();
         } else {
           throw new Error("Invalid response from CreateEntreeStock"); // Handle unexpected response
         }
@@ -81,7 +81,7 @@ const EntreeSortiePage = (props: Props) => {
     } catch (error) {
       console.error("Error:", error); // Log error to debug
       setEntreeModalOpen(false);
-      setShowError(true);
+      showErrorModal();
     }
   };
   const CloseSortie = async (data?: AddSortieStockDto) => {
@@ -99,7 +99,7 @@ const EntreeSortiePage = (props: Props) => {
               (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
             )
           );
-          setShowSuccess(true);
+          showSuccessModal();
         } else {
           throw new Error("Invalid response from CreateSortieStock"); // Handle unexpected response
         }
@@ -108,7 +108,7 @@ const EntreeSortiePage = (props: Props) => {
     } catch (error) {
       console.error("Error:", error); // Log error to debug
       setSortieModalOpen(false);
-      setShowError(true);
+      showErrorModal();
     }
   };
   return (
@@ -140,12 +140,12 @@ const EntreeSortiePage = (props: Props) => {
           )}
         </div>
       </div>
-      {showSuccess && (
+      {/* {showSuccess && (
         <SuccessDialog onClose={() => setShowSuccess(false)}></SuccessDialog>
       )}
       {showError && (
         <ErrorDialog onClose={() => setShowError(false)}></ErrorDialog>
-      )}
+      )} */}
       {isEntreeModalOpen && (
         <AddEntreeStockModal
           isOpen={isEntreeModalOpen}

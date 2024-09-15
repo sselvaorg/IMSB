@@ -8,12 +8,11 @@ import SuccessDialog from "../../Components/SuccessDialog/SuccessDialog";
 import ErrorDialog from "../../Components/ErrorDialog/ErrorDialog";
 import TableSkeleton from "../../Components/TableSkeleton/TableSkeleton";
 import { AllArticles, CreateArticle } from "../../Services/ArticleService";
+import { showErrorModal, showSuccessModal } from "../../helpers/handlers";
 
 type Props = {};
 
 const StockPage = (props: Props) => {
-  const [showSuccess, setShowSuccess] = useState(false);
-  const [showError, setShowError] = useState(false);
   const [isModalOpen, setModalOpen] = useState<boolean>(false);
   const [articles, setArticles] = useState<Article[]>([]);
   const [isLoading, setLoading] = useState<boolean>(true);
@@ -35,12 +34,12 @@ const StockPage = (props: Props) => {
         const reponse = await CreateArticle(addArticleDto);
         if (reponse) {
           setArticles([...articles, reponse]);
-          setShowSuccess(true);
+          showSuccessModal();
         } else {
-          setShowError(true);
+          showErrorModal();
         }
       } catch (error) {
-        setShowError(true);
+        showErrorModal();
       }
     } else {
     }
@@ -68,8 +67,8 @@ const StockPage = (props: Props) => {
         isOpen={isModalOpen}
         onClose={CloseModal}
       ></AddArticleModal>
-      {showSuccess && <SuccessDialog onClose={() => setShowSuccess(false)} />}
-      {showError && <ErrorDialog onClose={() => setShowError(false)} />}
+      {/* {showSuccess && <SuccessDialog onClose={() => setShowSuccess(false)} />}
+      {showError && <ErrorDialog onClose={() => setShowError(false)} />} */}
     </>
   );
 };

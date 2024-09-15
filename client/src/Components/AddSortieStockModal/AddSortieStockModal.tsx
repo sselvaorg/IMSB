@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Article } from "../../helpers/declarations";
-import { AllArticles } from "../../api/api";
+import { AllArticles } from "../../Services/ArticleService";
 
 interface ModalProps {
   isOpen: boolean;

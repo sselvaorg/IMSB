@@ -11,13 +11,13 @@ import {
   CreateFournisseur,
   AllFournisseurs,
 } from "../../Services/FournisseurService";
+import { showErrorModal, showSuccessModal } from "../../helpers/handlers";
 
 type Props = {};
 
 const FournisseurPage = (props: Props) => {
   const [fournisseurs, setFournisseurs] = useState<Fournisseur[]>([]);
-  const [showSuccess, setShowSuccess] = useState(false);
-  const [showError, setShowError] = useState(false);
+
   const [isModalOpen, setModalOpen] = useState<boolean>(false);
   const [isLoading, setLoading] = useState<boolean>(true);
 
@@ -29,12 +29,12 @@ const FournisseurPage = (props: Props) => {
         const reponse = await CreateFournisseur(addFournisseurDto);
         if (reponse) {
           setFournisseurs([...fournisseurs, reponse]);
-          setShowSuccess(true);
+          showSuccessModal();
         } else {
-          setShowError(true);
+          showErrorModal();
         }
       } catch (error) {
-        setShowError(true);
+        showErrorModal();
       }
     } else {
     }
@@ -74,8 +74,8 @@ const FournisseurPage = (props: Props) => {
           onClose={CloseModal}
         ></AddFournisseurModal>
       )}
-      {showSuccess && <SuccessDialog onClose={() => setShowSuccess(false)} />}
-      {showError && <ErrorDialog onClose={() => setShowError(false)} />}
+      {/* {showSuccess && <SuccessDialog onClose={() => setShowSuccess(false)} />}
+      {showError && <ErrorDialog onClose={() => setShowError(false)} />} */}
     </div>
   );
 };

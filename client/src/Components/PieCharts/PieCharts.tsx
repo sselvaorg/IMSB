@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Chart from "react-apexcharts";
-import { AllArticles } from "../../api/api";
+import { AllArticles } from "../../Services/ArticleService";
 
 type Props = {};
 

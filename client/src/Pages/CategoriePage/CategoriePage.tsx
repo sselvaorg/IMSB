@@ -9,12 +9,11 @@ import SuccessDialog from "../../Components/SuccessDialog/SuccessDialog";
 import ErrorDialog from "../../Components/ErrorDialog/ErrorDialog";
 import TableSkeleton from "../../Components/TableSkeleton/TableSkeleton";
 import { AllCategories, CreateCategory } from "../../Services/CategorieService";
+import { showErrorModal, showSuccessModal } from "../../helpers/handlers";
 
 type Props = {};
 
 const CategoriePage = (props: Props) => {
-  const [showSuccess, setShowSuccess] = useState(false);
-  const [showError, setShowError] = useState(false);
   const [isModalOpen, setModalOpen] = useState<boolean>(false);
   const [categories, setCategories] = useState<Categorie[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
@@ -40,15 +39,14 @@ const CategoriePage = (props: Props) => {
         const reponse = await CreateCategory(addCategorieDto);
         if (reponse) {
           setCategories([...categories, reponse]);
-          setShowSuccess(true);
+          showSuccessModal();
         } else {
-          setShowError(true);
+          showErrorModal();
         }
       } catch (error) {
-        setShowError(true);
+        showErrorModal();
       }
     } else {
-      // setShowError(true);
     }
   };
   return (
@@ -76,8 +74,8 @@ const CategoriePage = (props: Props) => {
           onClose={CloseModal}
         ></AddCategoryModal>
       )}
-      {showSuccess && <SuccessDialog onClose={() => setShowSuccess(false)} />}
-      {showError && <ErrorDialog onClose={() => setShowError(false)} />}{" "}
+      {/* {showSuccess && <SuccessDialog onClose={() => setShowSuccess(false)} />}
+      {showError && <ErrorDialog onClose={() => setShowError(false)} />} */}
     </div>
   );
 };
