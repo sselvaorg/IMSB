@@ -8,6 +8,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.demo.config.JwtConfig;
+import com.example.demo.dtos.auth.AuthResponseDto;
 import com.example.demo.dtos.auth.LoginDto;
 import com.example.demo.dtos.auth.RegisterDto;
 import com.example.demo.models.Role;
@@ -31,6 +33,8 @@ public class AuthController {
     private RoleRepository roleRepository;
     @Autowired
     private PasswordEncoder passwordEncoder;
+    @Autowired
+    private JwtConfig jwtConfig;
 
     public AuthController(AuthenticationManager authenticationManager, UtilisateurRepository utilisateurRepository,
             RoleRepository roleRepository, PasswordEncoder passwordEncoder) {
@@ -57,11 +61,12 @@ public class AuthController {
     }
 
     @PostMapping("Login")
-    public ResponseEntity<String> Login(@RequestBody LoginDto loginDto) {
+    public ResponseEntity<AuthResponseDto> Login(@RequestBody LoginDto loginDto) {
         Authentication authentication = authenticationManager
                 .authenticate(new UsernamePasswordAuthenticationToken(loginDto.getUserName(), loginDto.getPassword()));
         SecurityContextHolder.getContext().setAuthentication(authentication);
-        return ResponseEntity.ok("User Signed Successfully");
+        String token = jwtConfig.generateToken(authentication);
+        return ResponseEntity.ok(new AuthResponseDto(token));
 
     }
 
