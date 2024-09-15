@@ -7,6 +7,8 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.stereotype.Service;
+
 import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -14,6 +16,7 @@ import com.example.demo.models.Role;
 import com.example.demo.models.Utilisateur;
 import com.example.demo.repositories.UtilisateurRepository;
 
+@Service
 public class AuthService implements UserDetailsService {
     @Autowired
 
