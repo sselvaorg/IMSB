@@ -62,3 +62,7 @@ export interface AuthToken {
   accessToken: string;
   tokenType: string;
 }
+export type UserProfile = {
+  userName: string;
+  email: string;
+};
