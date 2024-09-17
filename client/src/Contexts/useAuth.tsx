@@ -4,10 +4,10 @@ import { useNavigate } from "react-router";
 import { Login, Register } from "../Services/AuthService";
 import { showErrorModal, showSuccessModal } from "../helpers/handlers";
 import React from "react";
-
+import axios from "axios";
 type UserContextType = {
   token: string | null;
-  register: (
+  RegisterUser: (
     email: string,
     userName: string,
     password: string,
@@ -15,7 +15,7 @@ type UserContextType = {
   ) => void;
   login: (username: string, password: string) => void;
   logout: () => void;
-  isLoggedIn: () => void;
+  isLoggedIn: () => boolean;
 };
 type Props = { children: React.ReactNode };
 const AuthContext = createContext<UserContextType>({} as UserContextType);
@@ -28,11 +28,11 @@ export const UserProvider = ({ children }: Props) => {
     const token = localStorage.getItem("token");
     if (token) {
       setToken(token);
-      axios.defaults.headers.common["Authorisation"] = `Bearer ${token}`;
+      axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
     }
     setIsReady(true);
   }, []);
-  const register = async (
+  const RegisterUser = async (
     email: string,
     userName: string,
     password: string,
@@ -71,7 +71,7 @@ export const UserProvider = ({ children }: Props) => {
   };
   return (
     <AuthContext.Provider
-      value={{ token, register, login, logout, isLoggedIn }}
+      value={{ token, RegisterUser, login, logout, isLoggedIn }}
     >
       {isReady ? children : null}
     </AuthContext.Provider>

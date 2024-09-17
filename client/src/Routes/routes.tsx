@@ -8,6 +8,7 @@ import EntreeSortiePage from "../Pages/EntreeSortiePage/EntreeSortiePage";
 import InboxPage from "../Pages/InboxPage/InboxPage";
 import NotFound from "../Pages/NotFound/NotFound";
 import LoginPage from "../Pages/LoginPage/LoginPage";
+import RegisterPage from "../Pages/RegisterPage/RegisterPage";
 export const routes = createBrowserRouter([
   {
     path: "/",
@@ -20,6 +21,7 @@ export const routes = createBrowserRouter([
       { path: "/flux", element: <EntreeSortiePage></EntreeSortiePage> },
       { path: "/inbox", element: <InboxPage></InboxPage> },
       { path: "/login", element: <LoginPage></LoginPage> },
+      { path: "/register", element: <RegisterPage></RegisterPage> },
       { path: "*", element: <NotFound></NotFound> },
     ],
   },

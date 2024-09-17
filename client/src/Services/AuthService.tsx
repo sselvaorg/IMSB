@@ -22,9 +22,9 @@ export const Register = async (
   try {
     const reponse = await axios.post<any>(`${apiBase}/Api/Auth/Register`, {
       userName: userName,
+      email: email,
       password: password,
       role: role,
-      email: email,
     });
     return reponse.data;
   } catch (error: any) {
