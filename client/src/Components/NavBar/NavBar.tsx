@@ -28,7 +28,7 @@ const NavBar = (props: Props) => {
               (555) 412-1234
             </a>
             <a
-              href="#"
+              href="login"
               className="text-sm  text-blue-600 dark:text-blue-500 hover:underline"
             >
               Login

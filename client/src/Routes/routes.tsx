@@ -7,6 +7,7 @@ import FournisseurPage from "../Pages/FournisseurPage/FournisseurPage";
 import EntreeSortiePage from "../Pages/EntreeSortiePage/EntreeSortiePage";
 import InboxPage from "../Pages/InboxPage/InboxPage";
 import NotFound from "../Pages/NotFound/NotFound";
+import LoginPage from "../Pages/LoginPage/LoginPage";
 export const routes = createBrowserRouter([
   {
     path: "/",
@@ -18,6 +19,7 @@ export const routes = createBrowserRouter([
       { path: "/category", element: <CategoriePage></CategoriePage> },
       { path: "/flux", element: <EntreeSortiePage></EntreeSortiePage> },
       { path: "/inbox", element: <InboxPage></InboxPage> },
+      { path: "/login", element: <LoginPage></LoginPage> },
       { path: "*", element: <NotFound></NotFound> },
     ],
   },

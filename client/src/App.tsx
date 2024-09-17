@@ -7,17 +7,20 @@ import NavBar from "./Components/NavBar/NavBar";
 import CategorieTable from "./Components/CategoryTable/CategorieTable";
 import FournisseurTable from "./Components/FournisseurTable/FournisseurTable";
 import { Outlet } from "react-router";
+import { UserProvider } from "./Contexts/useAuth";
 
 function App() {
   return (
     <div className="App">
-      <SideNav></SideNav>
-      <div className=" ps-64  h-full">
-        <NavBar></NavBar>
-        <div className="p-3 bg-sky-100 min-h-lvh">
-          <Outlet></Outlet>
+      <UserProvider>
+        <SideNav></SideNav>
+        <div className=" ps-64  h-full">
+          <NavBar></NavBar>
+          <div className="p-3 bg-sky-100 min-h-lvh">
+            <Outlet></Outlet>
+          </div>
         </div>
-      </div>
+      </UserProvider>
     </div>
   );
 }

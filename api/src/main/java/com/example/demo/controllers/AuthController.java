@@ -45,19 +45,35 @@ public class AuthController {
     }
 
     @PostMapping("Register")
-    public ResponseEntity<String> register(@RequestBody RegisterDto registerDto) {
+    public ResponseEntity<AuthResponseDto> register(@RequestBody RegisterDto registerDto) {
         if (utilisateurRepository.existsByNom(registerDto.getUserName())) {
-            return ResponseEntity.badRequest().body("user already exist");
+            return ResponseEntity.badRequest().body(new AuthResponseDto(null));
         }
+
+        // Create new user
         Utilisateur utilisateur = new Utilisateur();
         utilisateur.setNom(registerDto.getUserName());
         utilisateur.setMotDePasse(passwordEncoder.encode(registerDto.getPassword()));
         utilisateur.setEmail(registerDto.getEmail());
         utilisateur.setRole(registerDto.getRole());
-        Role role = roleRepository.findByName("User").get();
+
+        // Assign role to user
+        Role role = roleRepository.findByName("User").orElseThrow(() -> new RuntimeException("Role not found"));
         utilisateur.setRoles(Collections.singletonList(role));
+
+        // Save user to repository
         utilisateurRepository.save(utilisateur);
-        return ResponseEntity.ok("user created successfully");
+
+        // Authenticate the user automatically after registration
+        Authentication authentication = authenticationManager.authenticate(
+                new UsernamePasswordAuthenticationToken(registerDto.getUserName(), registerDto.getPassword()));
+        SecurityContextHolder.getContext().setAuthentication(authentication);
+
+        // Generate JWT token
+        String token = jwtConfig.generateToken(authentication);
+
+        // Return the JWT token as part of the response
+        return ResponseEntity.ok(new AuthResponseDto(token));
     }
 
     @PostMapping("Login")
