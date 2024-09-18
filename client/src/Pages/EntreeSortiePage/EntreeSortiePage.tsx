@@ -17,6 +17,9 @@ import {
   GetAllIOStock,
 } from "../../Services/IOService";
 import { showErrorModal, showSuccessModal } from "../../helpers/handlers";
+import NavBar from "../../Components/NavBar/NavBar";
+import SideNav from "../../Components/SideNav/SideNav";
+import { useAuth } from "../../Contexts/useAuth";
 
 type Props = {};
 
@@ -42,7 +45,7 @@ const EntreeSortiePage = (props: Props) => {
     };
   };
   const [ioStock, setIoStock] = useState<IOStock[]>([]);
-
+  const { isLoggedIn } = useAuth();
   const [isEntreeModalOpen, setEntreeModalOpen] = useState<boolean>(false);
   const [isSortieModalOpen, setSortieModalOpen] = useState<boolean>(false);
   const [isLoading, setLoading] = useState<boolean>(true);
@@ -112,9 +115,11 @@ const EntreeSortiePage = (props: Props) => {
     }
   };
   return (
-    <div>
+    <div className={`w-full m-0 ${isLoggedIn() ? "ps-64" : "p-0"}`}>
+      {isLoggedIn() ? <SideNav></SideNav> : <></>}
+      <NavBar></NavBar>
       <div>
-        <div className="pt-36">
+        <div className="pt-36 px-2">
           <div className="flex justify-end gap-5 items-center py-4 container mx-auto">
             <button
               onClick={(e) => {

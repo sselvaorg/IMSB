@@ -10,6 +10,9 @@ import ErrorDialog from "../../Components/ErrorDialog/ErrorDialog";
 import TableSkeleton from "../../Components/TableSkeleton/TableSkeleton";
 import { AllCategories, CreateCategory } from "../../Services/CategorieService";
 import { showErrorModal, showSuccessModal } from "../../helpers/handlers";
+import NavBar from "../../Components/NavBar/NavBar";
+import SideNav from "../../Components/SideNav/SideNav";
+import { useAuth } from "../../Contexts/useAuth";
 
 type Props = {};
 
@@ -17,6 +20,7 @@ const CategoriePage = (props: Props) => {
   const [isModalOpen, setModalOpen] = useState<boolean>(false);
   const [categories, setCategories] = useState<Categorie[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
+  const { isLoggedIn } = useAuth();
   useEffect(() => {
     const GetAllCategories = async () => {
       try {
@@ -50,9 +54,11 @@ const CategoriePage = (props: Props) => {
     }
   };
   return (
-    <div>
+    <div className={`w-full m-0 ${isLoggedIn() ? "ps-64" : "p-0"}`}>
+      {isLoggedIn() ? <SideNav></SideNav> : <></>}
+      <NavBar></NavBar>
       <div>
-        <div className="pt-36">
+        <div className="pt-36 px-2">
           <div className="flex justify-end py-4 container mx-auto">
             <button
               onClick={(e) => setModalOpen(true)}

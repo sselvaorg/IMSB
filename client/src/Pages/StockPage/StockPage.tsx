@@ -9,6 +9,9 @@ import ErrorDialog from "../../Components/ErrorDialog/ErrorDialog";
 import TableSkeleton from "../../Components/TableSkeleton/TableSkeleton";
 import { AllArticles, CreateArticle } from "../../Services/ArticleService";
 import { showErrorModal, showSuccessModal } from "../../helpers/handlers";
+import { useAuth } from "../../Contexts/useAuth";
+import SideNav from "../../Components/SideNav/SideNav";
+import NavBar from "../../Components/NavBar/NavBar";
 
 type Props = {};
 
@@ -16,7 +19,7 @@ const StockPage = (props: Props) => {
   const [isModalOpen, setModalOpen] = useState<boolean>(false);
   const [articles, setArticles] = useState<Article[]>([]);
   const [isLoading, setLoading] = useState<boolean>(true);
-
+  const { isLoggedIn } = useAuth();
   useEffect(() => {
     const GetAllArticles = async () => {
       setLoading(true);
@@ -45,8 +48,10 @@ const StockPage = (props: Props) => {
     }
   };
   return (
-    <>
-      <div className="pt-36">
+    <div className={`w-full m-0 ${isLoggedIn() ? "ps-64" : "p-0"}`}>
+      {isLoggedIn() ? <SideNav></SideNav> : <></>}
+      <NavBar></NavBar>
+      <div className="pt-36 px-2">
         <div className="flex justify-end py-4 container mx-auto">
           <button
             onClick={(e) => {
@@ -69,7 +74,7 @@ const StockPage = (props: Props) => {
       ></AddArticleModal>
       {/* {showSuccess && <SuccessDialog onClose={() => setShowSuccess(false)} />}
       {showError && <ErrorDialog onClose={() => setShowError(false)} />} */}
-    </>
+    </div>
   );
 };
 

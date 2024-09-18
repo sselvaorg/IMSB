@@ -13,10 +13,8 @@ function App() {
   return (
     <div className="App">
       <UserProvider>
-        <SideNav></SideNav>
-        <div className=" ps-64  h-full">
-          <NavBar></NavBar>
-          <div className="p-3 bg-sky-100 min-h-lvh">
+        <div className="   h-full">
+          <div className=" bg-sky-100 min-h-lvh">
             <Outlet></Outlet>
           </div>
         </div>

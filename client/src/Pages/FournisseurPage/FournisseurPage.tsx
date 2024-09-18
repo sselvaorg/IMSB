@@ -12,6 +12,9 @@ import {
   AllFournisseurs,
 } from "../../Services/FournisseurService";
 import { showErrorModal, showSuccessModal } from "../../helpers/handlers";
+import NavBar from "../../Components/NavBar/NavBar";
+import SideNav from "../../Components/SideNav/SideNav";
+import { useAuth } from "../../Contexts/useAuth";
 
 type Props = {};
 
@@ -20,7 +23,7 @@ const FournisseurPage = (props: Props) => {
 
   const [isModalOpen, setModalOpen] = useState<boolean>(false);
   const [isLoading, setLoading] = useState<boolean>(true);
-
+  const { isLoggedIn } = useAuth();
   const CloseModal = async (addFournisseurDto?: AddFournisseurDto) => {
     setModalOpen(false);
     if (addFournisseurDto) {
@@ -50,8 +53,10 @@ const FournisseurPage = (props: Props) => {
   }, []);
 
   return (
-    <div>
-      <div className="pt-36">
+    <div className={`w-full m-0 ${isLoggedIn() ? "ps-64" : "p-0"}`}>
+      {isLoggedIn() ? <SideNav></SideNav> : <></>}
+      <NavBar></NavBar>
+      <div className="pt-36 px-2">
         <div className="flex justify-end py-4 container mx-auto">
           <button
             onClick={(e) => {
