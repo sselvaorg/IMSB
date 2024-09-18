@@ -1,8 +1,10 @@
 import React from "react";
+import { useAuth } from "../../Contexts/useAuth";
 
 type Props = {};
 
 const NavBar = (props: Props) => {
+  const { isLoggedIn, logout } = useAuth();
   return (
     <div>
       <nav className="bg-white border-gray-200 dark:bg-gray-900">
@@ -27,12 +29,32 @@ const NavBar = (props: Props) => {
             >
               (555) 412-1234
             </a>
-            <a
-              href="login"
-              className="text-sm  text-blue-600 dark:text-blue-500 hover:underline"
-            >
-              Login
-            </a>
+            {!isLoggedIn() ? (
+              <>
+                <a
+                  href="login"
+                  className="text-sm  text-blue-600 dark:text-blue-500 hover:underline"
+                >
+                  Login
+                </a>
+                <a
+                  href="register"
+                  className="text-sm  text-blue-600 dark:text-blue-500 hover:underline"
+                >
+                  Signup
+                </a>
+              </>
+            ) : (
+              <a
+                href="/"
+                onClick={(e) => {
+                  logout();
+                }}
+                className="text-sm  text-blue-600 dark:text-blue-500 hover:underline"
+              >
+                Logout
+              </a>
+            )}
           </div>
         </div>
       </nav>

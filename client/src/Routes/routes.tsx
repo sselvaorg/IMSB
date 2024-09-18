@@ -9,17 +9,53 @@ import InboxPage from "../Pages/InboxPage/InboxPage";
 import NotFound from "../Pages/NotFound/NotFound";
 import LoginPage from "../Pages/LoginPage/LoginPage";
 import RegisterPage from "../Pages/RegisterPage/RegisterPage";
+import ProtectedRoutes from "./ProtectedRoutes";
 export const routes = createBrowserRouter([
   {
     path: "/",
     element: <App></App>,
     children: [
       { path: "", element: <DashboardPage></DashboardPage> },
-      { path: "/stock", element: <StockPage></StockPage> },
-      { path: "/fournisseur", element: <FournisseurPage></FournisseurPage> },
-      { path: "/category", element: <CategoriePage></CategoriePage> },
-      { path: "/flux", element: <EntreeSortiePage></EntreeSortiePage> },
-      { path: "/inbox", element: <InboxPage></InboxPage> },
+      {
+        path: "/stock",
+        element: (
+          <ProtectedRoutes>
+            <StockPage></StockPage>
+          </ProtectedRoutes>
+        ),
+      },
+      {
+        path: "/fournisseur",
+        element: (
+          <ProtectedRoutes>
+            <FournisseurPage></FournisseurPage>
+          </ProtectedRoutes>
+        ),
+      },
+      {
+        path: "/category",
+        element: (
+          <ProtectedRoutes>
+            <CategoriePage></CategoriePage>
+          </ProtectedRoutes>
+        ),
+      },
+      {
+        path: "/flux",
+        element: (
+          <ProtectedRoutes>
+            <EntreeSortiePage></EntreeSortiePage>
+          </ProtectedRoutes>
+        ),
+      },
+      {
+        path: "/inbox",
+        element: (
+          <ProtectedRoutes>
+            <InboxPage></InboxPage>
+          </ProtectedRoutes>
+        ),
+      },
       { path: "/login", element: <LoginPage></LoginPage> },
       { path: "/register", element: <RegisterPage></RegisterPage> },
       { path: "*", element: <NotFound></NotFound> },

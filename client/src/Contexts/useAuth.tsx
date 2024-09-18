@@ -41,8 +41,9 @@ export const UserProvider = ({ children }: Props) => {
     await Register(email, userName, password, role).then(
       (response) => {
         localStorage.setItem("token", response.accessToken);
+        setToken(response.accessToken);
         showSuccessModal();
-        navigate("/");
+        navigate("/stock");
       },
       (error) => {
         showErrorModal();
@@ -53,8 +54,9 @@ export const UserProvider = ({ children }: Props) => {
     await Login(userName, password).then(
       (response) => {
         localStorage.setItem("token", response.accessToken);
+        setToken(response.accessToken);
         showSuccessModal();
-        navigate("/");
+        navigate("/stock");
       },
       (error) => {
         showErrorModal();
