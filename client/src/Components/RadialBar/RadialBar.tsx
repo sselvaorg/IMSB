@@ -1,10 +1,24 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import ApexCharts from "react-apexcharts";
+import { AllArticles } from "../../Services/ArticleService";
 
 type Props = {};
 
 const RadialBar = (props: Props) => {
-  const series = [67]; // The percentage for the radial bar
+  const [Chart, setChart] = useState<number[]>([0]); // The percentage for the radial bar
+
+  useEffect(() => {
+    const GetArticles = async () => {
+      const reponse = await AllArticles();
+      let charts: number = 0;
+      reponse.forEach((element) => {
+        charts += element.quantite;
+      });
+      setChart([(charts / 5000) | 0]);
+    };
+    GetArticles();
+  }, []);
+
   const options: ApexCharts.ApexOptions = {
     chart: {
       height: 150, // Reduced height
@@ -44,7 +58,7 @@ const RadialBar = (props: Props) => {
     stroke: {
       dashArray: 4,
     },
-    labels: ["Median Ratio"],
+    labels: [`Capacite remplissage ${Chart[0] * 5} k / 500 k`], // Split into two lines
   };
 
   return (
@@ -52,7 +66,7 @@ const RadialBar = (props: Props) => {
       <div id="chart">
         <ApexCharts
           options={options}
-          series={series}
+          series={Chart}
           type="radialBar"
           height={250}
         />
