@@ -1,16 +1,52 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import ApexCharts from "react-apexcharts";
+import axios from "axios";
+import {
+  GetEntreeProgress,
+  GetSortieProgress,
+} from "../../Services/ChartsService";
+
 type Props = {};
 
 const AreaCharts = (props: Props) => {
+  const [sortieData, setSortieData] = useState<number[]>([]);
+  const [entreeData, setEntreeData] = useState<number[]>([]);
+  const [categories, setCategories] = useState<string[]>([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const sortieProgress = await GetSortieProgress();
+        const entreeProgress = await GetEntreeProgress();
+
+        // Extracting the data and month (assuming month format is consistent with categories)
+        const sortieQuantities = sortieProgress.map(
+          (item) => item.totalQuantite
+        );
+        const entreeQuantities = entreeProgress.map(
+          (item) => item.totalQuantite
+        );
+        const months = sortieProgress.map((item) => item.month); // Assuming both responses have the same months
+
+        setSortieData(sortieQuantities);
+        setEntreeData(entreeQuantities);
+        setCategories(months);
+      } catch (error) {
+        console.error("Error fetching stock progress", error);
+      }
+    };
+
+    fetchData();
+  }, []);
+
   const series = [
     {
-      name: "series1",
-      data: [31, 40, 28, 51, 42, 109, 100],
+      name: "Entree Stock",
+      data: entreeData,
     },
     {
-      name: "series2",
-      data: [11, 32, 45, 32, 34, 52, 41],
+      name: "Sortie Stock",
+      data: sortieData,
     },
   ];
 
@@ -27,15 +63,7 @@ const AreaCharts = (props: Props) => {
     },
     xaxis: {
       type: "datetime",
-      categories: [
-        "2018-09-19T00:00:00.000Z",
-        "2018-09-19T01:30:00.000Z",
-        "2018-09-19T02:30:00.000Z",
-        "2018-09-19T03:30:00.000Z",
-        "2018-09-19T04:30:00.000Z",
-        "2018-09-19T05:30:00.000Z",
-        "2018-09-19T06:30:00.000Z",
-      ],
+      categories: categories,
     },
     tooltip: {
       x: {
@@ -54,7 +82,6 @@ const AreaCharts = (props: Props) => {
           height={350}
         />
       </div>
-      <div id="html-dist"></div>
     </div>
   );
 };

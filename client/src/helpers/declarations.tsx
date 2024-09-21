@@ -66,3 +66,7 @@ export type UserProfile = {
   userName: string;
   email: string;
 };
+export interface IOStockCharts {
+  month: string;
+  totalQuantite: number;
+}
