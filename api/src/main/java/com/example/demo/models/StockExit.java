@@ -5,30 +5,23 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
+
+import java.util.Date;
 
 @Data
+@Entity
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity
-public class Article {
-
+public class StockExit {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String name;
-    private String description;
+    @ManyToOne
+    private Article article;
+
     private int quantity;
-    private double price;
-
-    @ManyToOne
-    private Category category;
-
-    @ManyToOne
-    private Supplier supplier;
-
-    private String barcode;
+    private Date date;
+    private String destination;
 }
