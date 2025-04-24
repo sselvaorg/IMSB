@@ -64,7 +64,7 @@ const CategoryPage = (props: Props) => {
               onClick={(e) => setModalOpen(true)}
               className="bg-blue-500 hover:bg-blue-700 text-white px-3 py-2 font-medium rounded"
             >
-              Ajouter Category
+              Add Category
             </button>
           </div>
           {isLoading ? (

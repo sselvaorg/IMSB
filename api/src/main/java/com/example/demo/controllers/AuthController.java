@@ -55,6 +55,7 @@ public class AuthController {
 
     @PostMapping("Register")
     public ResponseEntity<AuthResponseDto> register(@RequestBody RegisterDto registerDto) {
+        System.out.println("register user:"+registerDto);
         if (userRepository.existsByName(registerDto.getUserName())) {
             return ResponseEntity.badRequest().body(new AuthResponseDto(null));
         }

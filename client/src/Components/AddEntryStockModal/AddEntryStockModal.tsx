@@ -10,7 +10,7 @@ interface ModalProps {
 export interface AddEntryStockDto {
   articleId: number;
   SupplierId: number;
-  quantite: number;
+  quantity: number;
   date: Date;
 }
 
@@ -19,7 +19,7 @@ const AddEntryStockModal = (props: ModalProps) => {
     date: new Date(),
     articleId: 0,
     SupplierId: 0,
-    quantite: 0,
+    quantity: 0,
   });
   const [Articles, setArticles] = useState<Article[]>([]);
   const [Suppliers, setSuppliers] = useState<Supplier[]>([]);
@@ -46,7 +46,7 @@ const AddEntryStockModal = (props: ModalProps) => {
         <div className="relative  bg-white  rounded-lg shadow dark:bg-gray-700">
           <div className="flex items-center justify-center  p-4 md:p-5 border-b rounded-t dark:border-gray-600">
             <h3 className="text-lg font-semibold text-gray-900  dark:text-white">
-              Declarer New Entry Stock
+              Add New Entry Stock
             </h3>
             <button
               onClick={() => props.onClose()}
@@ -79,23 +79,23 @@ const AddEntryStockModal = (props: ModalProps) => {
             <div className="grid gap-4 mb-4 grid-cols-12">
               <div className="col-span-6 sm:col-span-6">
                 <label
-                  htmlFor="quantite"
+                  htmlFor="quantity"
                   className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                 >
                   Quantity
                 </label>
                 <input
                   type="number"
-                  name="quantite"
-                  id="quantite"
+                  name="quantity"
+                  id="quantity"
                   className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                   placeholder="999"
                   required
-                  value={FormsValues?.quantite || ""}
+                  value={FormsValues?.quantity || ""}
                   onChange={(e) => {
                     setFormsValues((prev) => ({
                       ...prev,
-                      quantite: Number(e.target.value),
+                      quantity: Number(e.target.value),
                     }));
                   }}
                 />
@@ -149,7 +149,7 @@ const AddEntryStockModal = (props: ModalProps) => {
                   <option>Select Supplier</option>
                   {Suppliers.map((Supplier) => (
                     <option key={Supplier.id} value={Supplier.id}>
-                      {Supplier.nom}
+                      {Supplier.name}
                     </option>
                   ))}
                 </select>
@@ -175,7 +175,7 @@ const AddEntryStockModal = (props: ModalProps) => {
                   <option value="">Select article</option>
                   {Articles.map((article) => (
                     <option key={article.id} value={article.id}>
-                      {article.nom}
+                      {article.name}
                     </option>
                   ))}
                 </select>

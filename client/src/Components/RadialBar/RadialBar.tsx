@@ -12,7 +12,7 @@ const RadialBar = (props: Props) => {
       const reponse = await AllArticles();
       let charts: number = 0;
       reponse.forEach((element) => {
-        charts += element.quantite;
+        charts += element.quantity;
       });
       setChart([(charts / 5000) | 0]);
     };
@@ -58,7 +58,7 @@ const RadialBar = (props: Props) => {
     stroke: {
       dashArray: 4,
     },
-    labels: [`Capacite remplissage ${Chart[0] * 5} k / 500 k`], // Split into two lines
+    labels: [`capacity filling ${Chart[0] * 5} k / 500 k`], // Split into two lines
   };
 
   return (

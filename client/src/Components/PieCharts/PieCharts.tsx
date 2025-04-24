@@ -32,8 +32,8 @@ const PieCharts = (props: Props) => {
   useEffect(() => {
     const GetArticles = async () => {
       const reponse = await AllArticles();
-      setSeries(reponse.map((item) => item.quantite));
-      setLabels(reponse.map((item) => item.nom));
+      setSeries(reponse.map((item) => item.quantity));
+      setLabels(reponse.map((item) => item.name));
       setLoading(false);
     };
     GetArticles();

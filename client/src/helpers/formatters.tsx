@@ -13,17 +13,17 @@ export const IOMapper = (
     ...EntryStock.map((entry) => ({
       id: entry.id,
       type: "Entry",
-      intervenant: entry.Supplier.nom,
-      article: entry.article.nom,
-      quantite: entry.quantite,
+      intervenant: entry.Supplier.name,
+      article: entry.article.name,
+      quantity: entry.quantity,
       date: new Date(entry.date), // Convert string to Date
     })),
     ...ExitStock.map((exit) => ({
       id: exit.id,
       type: "Exit",
       intervenant: exit.destination,
-      article: exit.article.nom,
-      quantite: exit.quantite,
+      article: exit.article.name,
+      quantity: exit.quantity,
       date: new Date(exit.date), // Convert string to Date
     })),
   ].sort((a, b) => b.date.getTime() - a.date.getTime());

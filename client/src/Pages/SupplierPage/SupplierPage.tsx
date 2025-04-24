@@ -7,10 +7,7 @@ import AddSupplierModal, {
   AddSupplierDto,
 } from "../../Components/AddSupplierModal/AddSupplierModal";
 import TableSkeleton from "../../Components/TableSkeleton/TableSkeleton";
-import {
-  CreateSupplier,
-  AllSuppliers,
-} from "../../Services/SupplierService";
+import { CreateSupplier, AllSuppliers } from "../../Services/SupplierService";
 import { showErrorModal, showSuccessModal } from "../../helpers/handlers";
 import NavBar from "../../Components/NavBar/NavBar";
 import SideNav from "../../Components/SideNav/SideNav";
@@ -64,7 +61,7 @@ const SupplierPage = (props: Props) => {
             }}
             className="bg-blue-500 hover:bg-blue-700 text-white px-3 py-2 font-medium rounded"
           >
-            Declarer Supplier
+            Add Supplier
           </button>
         </div>
         {isLoading ? (

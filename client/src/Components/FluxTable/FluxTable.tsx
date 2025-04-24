@@ -46,9 +46,7 @@ const FluxTable = (props: Props) => {
                 >
                   <span
                     className={` flex justify-center items-center py-2 px-4 rounded-3xl text-white ${
-                      operation.type === "Exit"
-                        ? "bg-red-500"
-                        : "bg-green-500"
+                      operation.type === "Exit" ? "bg-red-500" : "bg-green-500"
                     }`}
                   >
                     {operation.type === "Exit" ? (
@@ -82,7 +80,7 @@ const FluxTable = (props: Props) => {
                 </td>
                 <td className="px-6 py-4">{operation.article}</td>
                 <td className="px-6 py-4">{operation.intervenant}</td>
-                <td className="px-6 py-4">{operation.quantite}</td>
+                <td className="px-6 py-4">{operation.quantity}</td>
 
                 <td className="px-6 py-4">
                   <a

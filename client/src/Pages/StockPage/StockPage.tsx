@@ -59,7 +59,7 @@ const StockPage = (props: Props) => {
             }}
             className="bg-blue-500 hover:bg-blue-700 text-white px-3 py-2 font-medium rounded"
           >
-            Ajouter Article
+            Add Article
           </button>
         </div>
         {isLoading ? (

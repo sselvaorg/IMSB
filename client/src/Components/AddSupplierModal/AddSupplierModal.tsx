@@ -5,17 +5,17 @@ interface ModalProps {
   onClose: (data?: AddSupplierDto) => void; // A function type that takes no arguments and returns void
 }
 export interface AddSupplierDto {
-  nom: string;
+  name: string;
   contact?: string;
-  adresse: string;
-  telephone: string;
+  address: string;
+  phone: string;
 }
 
 const AddSupplierModal = (props: ModalProps) => {
   const [FormsValues, setFormsValues] = useState<AddSupplierDto>({
-    nom: "",
-    adresse: "",
-    telephone: "",
+    name: "",
+    address: "",
+    phone: "",
     contact: "",
   });
   return (
@@ -77,11 +77,11 @@ const AddSupplierModal = (props: ModalProps) => {
                   className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                   placeholder="Type Supplier name"
                   required
-                  value={FormsValues?.nom || ""}
+                  value={FormsValues?.name || ""}
                   onChange={(e) => {
                     setFormsValues((prev) => ({
                       ...prev,
-                      nom: e.target.value,
+                      name: e.target.value,
                     }));
                   }}
                 />
@@ -91,20 +91,20 @@ const AddSupplierModal = (props: ModalProps) => {
                   htmlFor="name"
                   className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                 >
-                  Telephone
+                  phone
                 </label>
                 <input
                   type="text"
-                  name="Telephone"
-                  id="Telephone"
+                  name="phone"
+                  id="phone"
                   className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                  placeholder="Type Supplier Telephone"
+                  placeholder="Type Supplier phone"
                   required
-                  value={FormsValues?.telephone || ""}
+                  value={FormsValues?.phone || ""}
                   onChange={(e) => {
                     setFormsValues((prev) => ({
                       ...prev,
-                      telephone: e.target.value,
+                      phone: e.target.value,
                     }));
                   }}
                 />
@@ -114,20 +114,20 @@ const AddSupplierModal = (props: ModalProps) => {
                   htmlFor="name"
                   className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                 >
-                  Adresse
+                  address
                 </label>
                 <input
                   type="text"
-                  name="Adresse"
-                  id="Adresse"
+                  name="address"
+                  id="address"
                   className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                  placeholder="Type Supplier Adresse"
+                  placeholder="Type Supplier address"
                   required
-                  value={FormsValues?.adresse || ""}
+                  value={FormsValues?.address || ""}
                   onChange={(e) => {
                     setFormsValues((prev) => ({
                       ...prev,
-                      adresse: e.target.value,
+                      address: e.target.value,
                     }));
                   }}
                 />
@@ -137,7 +137,7 @@ const AddSupplierModal = (props: ModalProps) => {
                   htmlFor="name"
                   className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                 >
-                  Adresse
+                  Mail
                 </label>
                 <input
                   type="text"

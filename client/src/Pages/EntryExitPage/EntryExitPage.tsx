@@ -26,22 +26,22 @@ type Props = {};
 const EntryExitPage = (props: Props) => {
   const EntryToStock = (source: EntryStock): IOStock => {
     return {
-      article: source.article.nom,
+      article: source.article.name,
       date: source.date,
       id: source.id,
       type: "Entry",
-      intervenant: source.Supplier.nom,
-      quantite: source.quantite,
+      intervenant: source.Supplier.name,
+      quantity: source.quantity,
     };
   };
   const ExitToStock = (source: ExitStock): IOStock => {
     return {
-      article: source.article.nom,
+      article: source.article.name,
       date: source.date,
       id: source.id,
       type: "Exit",
       intervenant: source.destination,
-      quantite: source.quantite,
+      quantity: source.quantity,
     };
   };
   const [ioStock, setIoStock] = useState<IOStock[]>([]);

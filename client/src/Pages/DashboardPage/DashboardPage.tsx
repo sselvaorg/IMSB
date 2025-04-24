@@ -52,7 +52,7 @@ const DashboardPage = (props: Props) => {
                   />
                 </svg>
               }
-              value={stats?.nombreArticle}
+              value={stats?.namebreArticle}
               label="Articles"
             />
           )}
@@ -79,7 +79,7 @@ const DashboardPage = (props: Props) => {
                   />
                 </svg>
               }
-              value={stats?.nombreSupplier}
+              value={stats?.namebreSupplier}
               label="Suppliers"
             />
           )}
@@ -135,7 +135,7 @@ const DashboardPage = (props: Props) => {
                   />
                 </svg>
               }
-              value={stats?.nombreCategory}
+              value={stats?.namebreCategory}
               label="Categorys"
             />
           )}
@@ -172,7 +172,9 @@ const StatCard = ({
   value?: number;
   label: string;
 }) => (
-  <div className={`${color} px-3 py-2 rounded-lg flex justify-start gap-4 items-center`}>
+  <div
+    className={`${color} px-3 py-2 rounded-lg flex justify-start gap-4 items-center`}
+  >
     <div>{icon}</div>
     <div>
       <h1 className="font-sans text-5xl text-white">{value ?? 0}</h1>

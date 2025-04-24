@@ -1,6 +1,6 @@
 import { IOStockCharts, Stats } from "../helpers/declarations";
 import axios from "axios";
-const apiBase = "http://localhost:8080";
+const apiBase = "http://localhost:8083";
 
 export const GetDashboardStats = async (): Promise<Stats | null> => {
   try {

@@ -16,10 +16,10 @@ const SupplierTable = (props: Props) => {
                 Supplier
               </th>
               <th scope="col" className="px-6 py-3">
-                adresse
+                Address
               </th>
               <th scope="col" className="px-6 py-3">
-                telephone
+                phone
               </th>
               <th scope="col" className="px-6 py-3">
                 Action
@@ -36,10 +36,10 @@ const SupplierTable = (props: Props) => {
                   scope="row"
                   className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
                 >
-                  {Supplier.nom}
+                  {Supplier.name}
                 </th>
-                <td className="px-6 py-4"> {Supplier.adresse}</td>
-                <td className="px-6 py-4"> {Supplier.telephone}</td>
+                <td className="px-6 py-4"> {Supplier.address}</td>
+                <td className="px-6 py-4"> {Supplier.phone}</td>
                 <td className="px-6 py-4">
                   <a
                     href="#"

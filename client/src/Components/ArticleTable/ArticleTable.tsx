@@ -22,7 +22,7 @@ const ArticleTable = (props: Props) => {
                 Supplier
               </th>
               <th scope="col" className="px-6 py-3">
-                Prix
+                price
               </th>
               <th scope="col" className="px-6 py-3">
                 Quantity
@@ -42,12 +42,12 @@ const ArticleTable = (props: Props) => {
                   scope="row"
                   className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
                 >
-                  {article.nom}
+                  {article.name}
                 </th>
-                <td className="px-6 py-4">{article.categorie.nom}</td>
-                <td className="px-6 py-4">{article.Supplier.nom}</td>
-                <td className="px-6 py-4">${article.prix}</td>
-                <td className="px-6 py-4">{article.quantite}</td>
+                <td className="px-6 py-4">{article.category.name}</td>
+                <td className="px-6 py-4">{article.Supplier.name}</td>
+                <td className="px-6 py-4">${article.price}</td>
+                <td className="px-6 py-4">{article.quantity}</td>
                 <td className="px-6 py-4">
                   <a
                     href="#"

@@ -8,12 +8,12 @@ interface ModalProps {
   onClose: (data?: AddArticleDto) => void; // A function type that takes no arguments and returns void
 }
 export interface AddArticleDto {
-  nom: string;
+  name: string;
   description?: string;
   categoryId: number;
   SupplierId: number;
-  prix: number;
-  quantite: number;
+  price: number;
+  quantity: number;
   barcode: string;
 }
 const AddArticleModal = (props: ModalProps) => {
@@ -32,12 +32,12 @@ const AddArticleModal = (props: ModalProps) => {
   // };
 
   const [FormsValues, setFormsValues] = useState<AddArticleDto>({
-    nom: "",
+    name: "",
     description: "",
     categoryId: 0,
     SupplierId: 0,
-    prix: 0,
-    quantite: 0,
+    price: 0,
+    quantity: 0,
     barcode: "",
   });
   const [Categorys, setCategorys] = useState<Category[]>([]);
@@ -111,34 +111,34 @@ const AddArticleModal = (props: ModalProps) => {
                   className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                   placeholder="Type product name"
                   required
-                  value={FormsValues?.nom || ""}
+                  value={FormsValues?.name || ""}
                   onChange={(e) => {
                     setFormsValues((prev) => ({
                       ...prev,
-                      nom: e.target.value,
+                      name: e.target.value,
                     }));
                   }}
                 />
               </div>
               <div className="col-span-6 sm:col-span-6">
                 <label
-                  htmlFor="quantite"
+                  htmlFor="quantity"
                   className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                 >
                   Quantity
                 </label>
                 <input
                   type="number"
-                  name="quantite"
-                  id="quantite"
+                  name="quantity"
+                  id="quantity"
                   className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                   placeholder="999"
                   required
-                  value={FormsValues?.quantite || ""}
+                  value={FormsValues?.quantity || ""}
                   onChange={(e) => {
                     setFormsValues((prev) => ({
                       ...prev,
-                      quantite: Number(e.target.value),
+                      quantity: Number(e.target.value),
                     }));
                   }}
                 />
@@ -157,11 +157,11 @@ const AddArticleModal = (props: ModalProps) => {
                   className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                   placeholder="$2999"
                   required
-                  value={FormsValues?.prix || ""}
+                  value={FormsValues?.price || ""}
                   onChange={(e) => {
                     setFormsValues((prev) => ({
                       ...prev,
-                      prix: Number(e.target.value),
+                      price: Number(e.target.value),
                     }));
                   }}
                 />
@@ -187,7 +187,7 @@ const AddArticleModal = (props: ModalProps) => {
                   <option>Select Supplier</option>
                   {Suppliers.map((Supplier) => (
                     <option key={Supplier.id} value={Supplier.id}>
-                      {Supplier.nom}
+                      {Supplier.name}
                     </option>
                   ))}
                 </select>
@@ -211,9 +211,9 @@ const AddArticleModal = (props: ModalProps) => {
                   className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                 >
                   <option value="">Select category</option>
-                  {Categorys.map((categorie) => (
-                    <option key={categorie.id} value={categorie.id}>
-                      {categorie.nom}
+                  {Categorys.map((category) => (
+                    <option key={category.id} value={category.id}>
+                      {category.name}
                     </option>
                   ))}
                 </select>

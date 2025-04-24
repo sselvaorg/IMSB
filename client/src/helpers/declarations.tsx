@@ -1,24 +1,24 @@
 export interface Supplier {
   id: number;
-  nom: string;
+  name: string;
   contact: string;
-  adresse: string;
-  telephone: string;
+  address: string;
+  phone: string;
 }
 
 export interface Category {
   id: number;
-  nom: string;
+  name: string;
   description: string;
 }
 
 export interface Article {
   id: number;
-  nom: string;
+  name: string;
   description: string;
-  quantite: number;
-  prix: number;
-  categorie: Category;
+  quantity: number;
+  price: number;
+  category: Category;
   Supplier: Supplier;
   barcode: string;
 }
@@ -26,14 +26,14 @@ export interface Article {
 export interface ExitStock {
   id: number;
   article: Article;
-  quantite: number;
+  quantity: number;
   date: Date;
   destination: string;
 }
 export interface EntryStock {
   id: number;
   article: Article;
-  quantite: number;
+  quantity: number;
   date: Date;
   Supplier: Supplier;
 }
@@ -41,21 +41,21 @@ export interface IOStock {
   id: number;
   type: string;
   article: string;
-  quantite: number;
+  quantity: number;
   date: Date;
   intervenant: string;
 }
 export interface Stats {
-  nombreSupplier: number;
-  nombreArticle: number;
-  nombreCategory: number;
+  namebreSupplier: number;
+  namebreArticle: number;
+  namebreCategory: number;
   stockEpuisee: number;
 }
 export interface Message {
   id: number;
-  contenu: string;
-  titre: string;
-  estLu: boolean;
+  content: string;
+  title: string;
+  is_read: boolean;
   createdAt: Date;
 }
 export interface AuthToken {
