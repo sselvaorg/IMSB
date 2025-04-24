@@ -55,7 +55,7 @@ export interface Message {
   id: number;
   content: string;
   title: string;
-  is_read: boolean;
+  isRead: boolean;
   createdAt: Date;
 }
 export interface AuthToken {
