@@ -44,9 +44,9 @@ const ArticleTable = (props: Props) => {
                 >
                   {article.name}
                 </th>
-                <td className="px-6 py-4">{article.category.name}</td>
-                <td className="px-6 py-4">{article.Supplier.name}</td>
-                <td className="px-6 py-4">${article.price}</td>
+                <td className="px-6 py-4">{article.category?.name}</td>
+                <td className="px-6 py-4">{article.supplier?.name}</td>
+                <td className="px-6 py-4">Rs.{article.price}</td>
                 <td className="px-6 py-4">{article.quantity}</td>
                 <td className="px-6 py-4">
                   <a

@@ -11,7 +11,7 @@ export interface AddArticleDto {
   name: string;
   description?: string;
   categoryId: number;
-  SupplierId: number;
+  supplierId: number;
   price: number;
   quantity: number;
   barcode: string;
@@ -35,7 +35,7 @@ const AddArticleModal = (props: ModalProps) => {
     name: "",
     description: "",
     categoryId: 0,
-    SupplierId: 0,
+    supplierId: 0,
     price: 0,
     quantity: 0,
     barcode: "",
@@ -155,7 +155,7 @@ const AddArticleModal = (props: ModalProps) => {
                   name="price"
                   id="price"
                   className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                  placeholder="$2999"
+                  placeholder="Rs.2999"
                   required
                   value={FormsValues?.price || ""}
                   onChange={(e) => {
@@ -174,11 +174,11 @@ const AddArticleModal = (props: ModalProps) => {
                   Supplier
                 </label>
                 <select
-                  value={FormsValues?.SupplierId || ""}
+                  value={FormsValues?.supplierId || ""}
                   onChange={(e) => {
                     setFormsValues((prev) => ({
                       ...prev,
-                      SupplierId: Number(e.target.value), // Convert the value to a number
+                      supplierId: Number(e.target.value), // Convert the value to a number
                     }));
                   }}
                   id="Supplier"

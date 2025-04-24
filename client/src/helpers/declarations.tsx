@@ -19,23 +19,23 @@ export interface Article {
   quantity: number;
   price: number;
   category: Category;
-  Supplier: Supplier;
+  supplier: Supplier;
   barcode: string;
 }
 
-export interface ExitStock {
+export interface StockExit {
   id: number;
   article: Article;
   quantity: number;
   date: Date;
   destination: string;
 }
-export interface EntryStock {
+export interface StockEntry {
   id: number;
   article: Article;
   quantity: number;
   date: Date;
-  Supplier: Supplier;
+  supplier: Supplier;
 }
 export interface IOStock {
   id: number;

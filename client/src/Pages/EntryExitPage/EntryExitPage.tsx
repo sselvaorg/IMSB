@@ -1,19 +1,20 @@
 import React, { useEffect, useState } from "react";
 import FluxTable from "../../Components/FluxTable/FluxTable";
-import { EntryStock, IOStock, ExitStock } from "../../helpers/declarations";
+import { StockEntry, IOStock, StockExit } from "../../helpers/declarations";
 
 import SuccessDialog from "../../Components/SuccessDialog/SuccessDialog";
 import ErrorDialog from "../../Components/ErrorDialog/ErrorDialog";
-import AddEntryStockModal, {
-  AddEntryStockDto,
-} from "../../Components/AddEntryStockModal/AddEntryStockModal";
-import AddExitStockModal, {
-  AddExitStockDto,
-} from "../../Components/AddExitStockModal/AddExitStockModal";
+import AddStockEntryModal, {
+  AddStockEntryDto,
+} from "../../Components/AddStockEntryModal/AddStockEntryModal";
+
+import AddStockExitModal, {
+  AddStockExitDto,
+} from "../../Components/AddStockExitModal/AddStockExitModal";
 import TableSkeleton from "../../Components/TableSkeleton/TableSkeleton";
 import {
-  CreateEntryStock,
-  CreateExitStock,
+  CreateStockEntry,
+  CreateStockExit,
   GetAllIOStock,
 } from "../../Services/IOService";
 import { showErrorModal, showSuccessModal } from "../../helpers/handlers";
@@ -24,17 +25,17 @@ import { useAuth } from "../../Contexts/useAuth";
 type Props = {};
 
 const EntryExitPage = (props: Props) => {
-  const EntryToStock = (source: EntryStock): IOStock => {
+  const EntryToStock = (source: StockEntry): IOStock => {
     return {
       article: source.article.name,
       date: source.date,
       id: source.id,
       type: "Entry",
-      intervenant: source.Supplier.name,
+      intervenant: source.supplier.name,
       quantity: source.quantity,
     };
   };
-  const ExitToStock = (source: ExitStock): IOStock => {
+  const ExitToStock = (source: StockExit): IOStock => {
     return {
       article: source.article.name,
       date: source.date,
@@ -60,12 +61,12 @@ const EntryExitPage = (props: Props) => {
 
     GetAllIoOperations();
   }, []);
-  const CloseEntry = async (data?: AddEntryStockDto) => {
+  const CloseEntry = async (data?: AddStockEntryDto) => {
     try {
       setEntryModalOpen(false);
       console.log("Data:", data); // Log data to verify its content
       if (data) {
-        const reponse = await CreateEntryStock(data);
+        const reponse = await CreateStockEntry(data);
 
         console.log("Response:", reponse); // Log response to ensure it's valid
 
@@ -77,7 +78,7 @@ const EntryExitPage = (props: Props) => {
           );
           showSuccessModal();
         } else {
-          throw new Error("Invalid response from CreateEntryStock"); // Handle unexpected response
+          throw new Error("Invalid response from CreateStockEntry"); // Handle unexpected response
         }
       } else {
       }
@@ -87,12 +88,12 @@ const EntryExitPage = (props: Props) => {
       showErrorModal();
     }
   };
-  const CloseExit = async (data?: AddExitStockDto) => {
+  const CloseExit = async (data?: AddStockExitDto) => {
     try {
       setExitModalOpen(false);
       console.log("Data:", data); // Log data to verify its content
       if (data) {
-        const reponse = await CreateExitStock(data);
+        const reponse = await CreateStockExit(data);
 
         console.log("Response:", reponse); // Log response to ensure it's valid
 
@@ -104,7 +105,7 @@ const EntryExitPage = (props: Props) => {
           );
           showSuccessModal();
         } else {
-          throw new Error("Invalid response from CreateExitStock"); // Handle unexpected response
+          throw new Error("Invalid response from CreateStockExit"); // Handle unexpected response
         }
       } else {
       }
@@ -127,7 +128,7 @@ const EntryExitPage = (props: Props) => {
               }}
               className="bg-green-500 hover:bg-green-700 text-white px-3 py-2 font-medium rounded"
             >
-              Signaler Entry
+              report Entry
             </button>
             <button
               onClick={(e) => {
@@ -135,7 +136,7 @@ const EntryExitPage = (props: Props) => {
               }}
               className="bg-red-500 hover:bg-red-700 text-white px-3 py-2 font-medium rounded"
             >
-              Signaler Exit
+              report Exit
             </button>
           </div>
           {isLoading ? (
@@ -152,16 +153,16 @@ const EntryExitPage = (props: Props) => {
         <ErrorDialog onClose={() => setShowError(false)}></ErrorDialog>
       )} */}
       {isEntryModalOpen && (
-        <AddEntryStockModal
+        <AddStockEntryModal
           isOpen={isEntryModalOpen}
           onClose={CloseEntry}
-        ></AddEntryStockModal>
+        ></AddStockEntryModal>
       )}
       {isExitModalOpen && (
-        <AddExitStockModal
+        <AddStockExitModal
           isOpen={isExitModalOpen}
           onClose={CloseExit}
-        ></AddExitStockModal>
+        ></AddStockExitModal>
       )}
     </div>
   );

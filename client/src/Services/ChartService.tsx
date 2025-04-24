@@ -10,7 +10,7 @@ export const GetDashboardStats = async (): Promise<Stats | null> => {
 
     return reponse.data;
   } catch (error) {
-    console.error("Error in GetAllExitStocks:", error);
+    console.error("Error in GetAllStockExits:", error);
     return null;
   }
 };

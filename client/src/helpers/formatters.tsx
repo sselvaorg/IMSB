@@ -1,4 +1,4 @@
-import { EntryStock, IOStock, ExitStock } from "./declarations";
+import { StockEntry, IOStock, StockExit } from "./declarations";
 
 // utils/truncate.ts
 export const truncateText = (text: string, maxLength: number): string => {
@@ -6,19 +6,19 @@ export const truncateText = (text: string, maxLength: number): string => {
   return text.slice(0, maxLength) + "...";
 };
 export const IOMapper = (
-  EntryStock: EntryStock[],
-  ExitStock: ExitStock[]
+  StockEntry: StockEntry[],
+  StockExit: StockExit[]
 ): IOStock[] => {
   const ioStock: IOStock[] = [
-    ...EntryStock.map((entry) => ({
+    ...StockEntry.map((entry) => ({
       id: entry.id,
       type: "Entry",
-      intervenant: entry.Supplier.name,
+      intervenant: entry.supplier.name,
       article: entry.article.name,
       quantity: entry.quantity,
       date: new Date(entry.date), // Convert string to Date
     })),
-    ...ExitStock.map((exit) => ({
+    ...StockExit.map((exit) => ({
       id: exit.id,
       type: "Exit",
       intervenant: exit.destination,

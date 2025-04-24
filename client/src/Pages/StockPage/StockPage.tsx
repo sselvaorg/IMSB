@@ -24,6 +24,7 @@ const StockPage = (props: Props) => {
     const GetAllArticles = async () => {
       setLoading(true);
       const results = await AllArticles();
+      console.log(results);
       setArticles(results);
       setLoading(false);
     };
@@ -42,9 +43,11 @@ const StockPage = (props: Props) => {
           showErrorModal();
         }
       } catch (error) {
+        console.log(error);
         showErrorModal();
       }
     } else {
+      console.log("no article data");
     }
   };
   return (
