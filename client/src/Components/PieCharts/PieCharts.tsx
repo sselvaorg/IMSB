@@ -45,7 +45,7 @@ const PieCharts = (props: Props) => {
         <p>Loading chart...</p>
       ) : (
         <div id="chart">
-          <Chart options={options} series={series} type="pie" height={200} />
+          <Chart options={options} series={series} type="pie" height={200} className=" bg-gradient-to-r from-[#08D6DA] to-[#9DF8FA] text-black rounded-lg" />
         </div>
       )}
       <div id="html-dist"></div>
