@@ -124,13 +124,13 @@ const SideNav = (props: Props) => {
                   />
                 </svg>
                 <span className="flex-1 ms-3 whitespace-nowrap">
-                  Flux Entrées/Sorties
+                  Flux Entrées/Exits
                 </span>
               </Link>
             </li>
             <li>
               <Link
-                to="/fournisseur"
+                to="/Supplier"
                 className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
               >
                 <svg
@@ -147,7 +147,7 @@ const SideNav = (props: Props) => {
                   />
                 </svg>
                 <span className="flex-1 ms-3 whitespace-nowrap">
-                  Fournisseurs
+                  Suppliers
                 </span>
               </Link>
             </li>
@@ -170,7 +170,7 @@ const SideNav = (props: Props) => {
                   />
                 </svg>
                 <span className="flex-1 ms-3 whitespace-nowrap">
-                  Categories
+                  Categorys
                 </span>
               </Link>
             </li>

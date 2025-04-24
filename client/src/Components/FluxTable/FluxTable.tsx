@@ -23,11 +23,11 @@ const FluxTable = (props: Props) => {
                 Article
               </th>
               <th scope="col" className="px-6 py-3">
-                Fournisseur/Destination
+                Supplier/Destination
               </th>
 
               <th scope="col" className="px-6 py-3">
-                Quantite
+                Quantity
               </th>
               <th scope="col" className="px-6 py-3">
                 Action
@@ -46,12 +46,12 @@ const FluxTable = (props: Props) => {
                 >
                   <span
                     className={` flex justify-center items-center py-2 px-4 rounded-3xl text-white ${
-                      operation.type === "Sortie"
+                      operation.type === "Exit"
                         ? "bg-red-500"
                         : "bg-green-500"
                     }`}
                   >
-                    {operation.type === "Sortie" ? (
+                    {operation.type === "Exit" ? (
                       <svg
                         className="w-6 h-6"
                         aria-hidden="true"

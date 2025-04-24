@@ -7,5 +7,5 @@ import lombok.Data;
 @AllArgsConstructor
 public class StockEntryProgressDto {
     private String month;
-    private int totalQuantite;
+    private int totalQuantity;
 }

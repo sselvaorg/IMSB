@@ -1,12 +1,12 @@
 import React from "react";
-import { Categorie } from "../../helpers/declarations";
+import { Category } from "../../helpers/declarations";
 import { truncateText } from "../../helpers/formatters";
 
 interface Props {
-  categories: Categorie[];
+  categories: Category[];
 }
 
-const CategorieTable = (props: Props) => {
+const CategoryTable = (props: Props) => {
   return (
     <div>
       <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
@@ -14,7 +14,7 @@ const CategorieTable = (props: Props) => {
           <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
             <tr>
               <th scope="col" className="px-6 py-3">
-                Categorie
+                Category
               </th>
               <th scope="col" className="px-6 py-3">
                 Description
@@ -56,4 +56,4 @@ const CategorieTable = (props: Props) => {
   );
 };
 
-export default CategorieTable;
+export default CategoryTable;

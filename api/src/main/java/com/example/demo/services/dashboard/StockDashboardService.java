@@ -27,8 +27,8 @@ public class StockDashboardService implements IStockDashboardService {
     private final CategoryRepository categoryRepository;
 
     public StockDashboardService(StockExitRepository stockExitRepository, ArticleRepository articleRepository,
-                                  StockEntryRepository stockEntryRepository, CategoryRepository categoryRepository,
-                                  SupplierRepository SupplierRepository) {
+            StockEntryRepository stockEntryRepository, CategoryRepository categoryRepository,
+            SupplierRepository SupplierRepository) {
         this.SupplierRepository = SupplierRepository;
         this.articleRepository = articleRepository;
         this.categoryRepository = categoryRepository;
@@ -41,7 +41,7 @@ public class StockDashboardService implements IStockDashboardService {
         DashboardStats dashboardStats = new DashboardStats();
         dashboardStats.setNumberOfSuppliers(SupplierRepository.count());
         dashboardStats.setNumberOfArticles(articleRepository.count());
-        dashboardStats.setNumberOfCategories(categoryRepository.count());
+        dashboardStats.setNumberOfCategorys(categoryRepository.count());
         dashboardStats.setOutOfStock(articleRepository.countByQuantityLessThanEqual(10));
         return dashboardStats;
     }
@@ -53,8 +53,8 @@ public class StockDashboardService implements IStockDashboardService {
 
         for (Object[] row : result) {
             String month = (String) row[0];
-            int totalQuantite = ((Number) row[1]).intValue();
-            progressDTOs.add(new StockEntryProgressDto(month, totalQuantite));
+            int totalQuantity = ((Number) row[1]).intValue();
+            progressDTOs.add(new StockEntryProgressDto(month, totalQuantity));
         }
 
         return progressDTOs;
@@ -67,8 +67,8 @@ public class StockDashboardService implements IStockDashboardService {
 
         for (Object[] row : result) {
             String month = (String) row[0];
-            int totalQuantite = ((Number) row[1]).intValue();
-            progressDTOs.add(new StockExitProgressDto(month, totalQuantite));
+            int totalQuantity = ((Number) row[1]).intValue();
+            progressDTOs.add(new StockExitProgressDto(month, totalQuantity));
         }
 
         return progressDTOs;

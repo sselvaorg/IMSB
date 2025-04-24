@@ -11,7 +11,7 @@ export const GetAllMessages = async (): Promise<Message[]> => {
 
     return reponse.data;
   } catch (error) {
-    console.error("Error in GetAllSortieStocks:", error);
+    console.error("Error in GetAllExitStocks:", error);
     return [];
   }
 };
@@ -23,7 +23,7 @@ export const MarkAsRead = async (id: number): Promise<Message | null> => {
 
     return reponse.data;
   } catch (error) {
-    console.error("Error in GetAllSortieStocks:", error);
+    console.error("Error in GetAllExitStocks:", error);
     return null;
   }
 };

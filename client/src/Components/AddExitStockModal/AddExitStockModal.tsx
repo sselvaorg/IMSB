@@ -1,38 +1,48 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { Article } from "../../helpers/declarations";
+import { AllArticles } from "../../Services/ArticleService";
 
 interface ModalProps {
   isOpen: boolean;
-  onClose: (data?: AddFournisseurDto) => void; // A function type that takes no arguments and returns void
+  onClose: (data?: AddExitStockDto) => void; // A function type that takes no arguments and returns void
 }
-export interface AddFournisseurDto {
-  nom: string;
-  contact?: string;
-  adresse: string;
-  telephone: string;
+export interface AddExitStockDto {
+  articleId: number;
+  destination: string;
+  quantite: number;
+  date: Date;
 }
 
-const AddFournisseurModal = (props: ModalProps) => {
-  const [FormsValues, setFormsValues] = useState<AddFournisseurDto>({
-    nom: "",
-    adresse: "",
-    telephone: "",
-    contact: "",
+const AddExitStockModal = (props: ModalProps) => {
+  const [FormsValues, setFormsValues] = useState<AddExitStockDto>({
+    date: new Date(),
+    articleId: 0,
+    destination: "",
+    quantite: 0,
   });
+  const [Articles, setArticles] = useState<Article[]>([]);
+  useEffect(() => {
+    const GetEntrys = async () => {
+      const articlesReponse = await AllArticles();
+      setArticles(articlesReponse);
+    };
+    GetEntrys();
+  }, []);
   return (
     <div
       onClick={(e) => props.onClose()}
-      className="fixed left-0 top-0 z-50 inset-0  bg-black bg-opacity-50 flex items-center justify-center"
+      className="fixed left-0 top-0 z-50 inset-0 bg-black bg-opacity-50 flex items-center justify-center"
     >
       <div
         onClick={(e) => {
           e.stopPropagation();
         }}
-        className="relative  p-4 w-180  max-h-full"
+        className="relative  p-4  max-w-fit max-h-full"
       >
         <div className="relative  bg-white  rounded-lg shadow dark:bg-gray-700">
           <div className="flex items-center justify-center  p-4 md:p-5 border-b rounded-t dark:border-gray-600">
             <h3 className="text-lg font-semibold text-gray-900  dark:text-white">
-              Create New Fournisseur
+              Declarer New Exit Stock
             </h3>
             <button
               onClick={() => props.onClose()}
@@ -63,97 +73,104 @@ const AddFournisseurModal = (props: ModalProps) => {
             className="p-4 md:p-5"
           >
             <div className="grid gap-4 mb-4 grid-cols-12">
-              <div className="col-span-12">
+              <div className="col-span-6 sm:col-span-6">
                 <label
-                  htmlFor="name"
+                  htmlFor="quantite"
                   className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                 >
-                  Name
+                  Quantity
                 </label>
                 <input
-                  type="text"
-                  name="name"
-                  id="name"
+                  type="number"
+                  name="quantite"
+                  id="quantite"
                   className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                  placeholder="Type Fournisseur name"
+                  placeholder="999"
                   required
-                  value={FormsValues?.nom || ""}
+                  value={FormsValues?.quantite || ""}
                   onChange={(e) => {
                     setFormsValues((prev) => ({
                       ...prev,
-                      nom: e.target.value,
+                      quantite: Number(e.target.value),
                     }));
                   }}
                 />
               </div>
-              <div className="col-span-12">
+              <div className="col-span-6 sm:col-span-6">
                 <label
-                  htmlFor="name"
+                  htmlFor="date"
                   className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                 >
-                  Telephone
+                  Date
                 </label>
                 <input
-                  type="text"
-                  name="Telephone"
-                  id="Telephone"
+                  type="datetime-local"
+                  name="date"
+                  id="date"
                   className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                  placeholder="Type Fournisseur Telephone"
+                  placeholder="date"
                   required
-                  value={FormsValues?.telephone || ""}
+                  value={
+                    FormsValues?.date
+                      ? new Date(FormsValues.date).toISOString().slice(0, 16)
+                      : ""
+                  }
                   onChange={(e) => {
                     setFormsValues((prev) => ({
                       ...prev,
-                      telephone: e.target.value,
+                      date: new Date(e.target.value),
                     }));
                   }}
                 />
               </div>
-              <div className="col-span-12">
+              <div className="col-span-6 sm:col-span-6">
                 <label
-                  htmlFor="name"
+                  htmlFor="destination"
                   className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                 >
-                  Adresse
+                  Destination
                 </label>
                 <input
                   type="text"
-                  name="Adresse"
-                  id="Adresse"
+                  name="destination"
+                  id="destination"
                   className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                  placeholder="Type Fournisseur Adresse"
+                  placeholder="destination"
                   required
-                  value={FormsValues?.adresse || ""}
+                  value={FormsValues?.destination}
                   onChange={(e) => {
                     setFormsValues((prev) => ({
                       ...prev,
-                      adresse: e.target.value,
+                      destination: e.target.value,
                     }));
                   }}
                 />
               </div>
-              <div className="col-span-12">
+              <div className="col-span-6 sm:col-span-6">
                 <label
-                  htmlFor="name"
+                  htmlFor="article"
                   className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                 >
-                  Adresse
+                  Article
                 </label>
-                <input
-                  type="text"
-                  name="email"
-                  id="email"
-                  className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                  placeholder="Type Fournisseur email"
-                  required
-                  value={FormsValues?.contact || ""}
+                <select
+                  id="article"
+                  value={FormsValues?.articleId || ""}
                   onChange={(e) => {
                     setFormsValues((prev) => ({
                       ...prev,
-                      contact: e.target.value,
+                      articleId: Number(e.target.value), // Convert the value to a number
                     }));
                   }}
-                />
+                  className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                >
+                  <option value="">Select article</option>
+                  {Articles.map((article) => (
+                    <option key={article.id} value={article.id}>
+                      {article.nom}
+                    </option>
+                  ))}
+                </select>
               </div>
             </div>
             <button
@@ -172,7 +189,7 @@ const AddFournisseurModal = (props: ModalProps) => {
                   clipRule="evenodd"
                 ></path>
               </svg>
-              Add new Fournisseur
+              Add new Exit
             </button>
           </form>
         </div>
@@ -181,4 +198,4 @@ const AddFournisseurModal = (props: ModalProps) => {
   );
 };
 
-export default AddFournisseurModal;
+export default AddExitStockModal;

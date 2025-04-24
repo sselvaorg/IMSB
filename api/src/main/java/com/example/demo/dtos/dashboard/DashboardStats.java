@@ -6,6 +6,6 @@ import lombok.Data;
 public class DashboardStats {
     private Long numberOfSuppliers;
     private Long numberOfArticles;
-    private Long numberOfCategories;
+    private Long numberOfCategorys;
     private Long outOfStock;
 }

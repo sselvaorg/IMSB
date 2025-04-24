@@ -16,16 +16,16 @@ const ArticleTable = (props: Props) => {
                 Article
               </th>
               <th scope="col" className="px-6 py-3">
-                Categorie
+                Category
               </th>
               <th scope="col" className="px-6 py-3">
-                Fournisseur
+                Supplier
               </th>
               <th scope="col" className="px-6 py-3">
                 Prix
               </th>
               <th scope="col" className="px-6 py-3">
-                Quantite
+                Quantity
               </th>
               <th scope="col" className="px-6 py-3">
                 Action
@@ -45,7 +45,7 @@ const ArticleTable = (props: Props) => {
                   {article.nom}
                 </th>
                 <td className="px-6 py-4">{article.categorie.nom}</td>
-                <td className="px-6 py-4">{article.fournisseur.nom}</td>
+                <td className="px-6 py-4">{article.Supplier.nom}</td>
                 <td className="px-6 py-4">${article.prix}</td>
                 <td className="px-6 py-4">{article.quantite}</td>
                 <td className="px-6 py-4">

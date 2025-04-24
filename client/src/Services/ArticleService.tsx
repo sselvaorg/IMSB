@@ -26,7 +26,7 @@ export const CreateArticle = async (
 
     return reponse.data;
   } catch (error) {
-    console.error("Error in GetAllFournisseurs:", error);
+    console.error("Error in getAllSuppliers:", error);
     return null;
   }
 };

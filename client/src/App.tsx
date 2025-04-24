@@ -4,8 +4,8 @@ import "./App.css";
 import SideNav from "./Components/SideNav/SideNav";
 import ArticleTable from "./Components/ArticleTable/ArticleTable";
 import NavBar from "./Components/NavBar/NavBar";
-import CategorieTable from "./Components/CategoryTable/CategorieTable";
-import FournisseurTable from "./Components/FournisseurTable/FournisseurTable";
+import CategoryTable from "./Components/CategoryTable/CategoryTable";
+import SupplierTable from "./Components/SupplierTable/SupplierTable";
 import { Outlet } from "react-router";
 import { UserProvider } from "./Contexts/useAuth";
 

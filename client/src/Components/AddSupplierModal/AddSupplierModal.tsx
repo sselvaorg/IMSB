@@ -1,52 +1,38 @@
-import React, { useEffect, useState } from "react";
-import { Article, Fournisseur } from "../../helpers/declarations";
-import { AllArticles } from "../../Services/ArticleService";
-import { AllFournisseurs } from "../../Services/FournisseurService";
+import React, { useState } from "react";
 
 interface ModalProps {
   isOpen: boolean;
-  onClose: (data?: AddEntreeStockDto) => void; // A function type that takes no arguments and returns void
+  onClose: (data?: AddSupplierDto) => void; // A function type that takes no arguments and returns void
 }
-export interface AddEntreeStockDto {
-  articleId: number;
-  fournisseurId: number;
-  quantite: number;
-  date: Date;
+export interface AddSupplierDto {
+  nom: string;
+  contact?: string;
+  adresse: string;
+  telephone: string;
 }
 
-const AddEntreeStockModal = (props: ModalProps) => {
-  const [FormsValues, setFormsValues] = useState<AddEntreeStockDto>({
-    date: new Date(),
-    articleId: 0,
-    fournisseurId: 0,
-    quantite: 0,
+const AddSupplierModal = (props: ModalProps) => {
+  const [FormsValues, setFormsValues] = useState<AddSupplierDto>({
+    nom: "",
+    adresse: "",
+    telephone: "",
+    contact: "",
   });
-  const [Articles, setArticles] = useState<Article[]>([]);
-  const [Fournisseurs, setFournisseurs] = useState<Fournisseur[]>([]);
-  useEffect(() => {
-    const GetEntrys = async () => {
-      const articlesReponse = await AllArticles();
-      setArticles(articlesReponse);
-      const fournisseursReponse = await AllFournisseurs();
-      setFournisseurs(fournisseursReponse);
-    };
-    GetEntrys();
-  }, []);
   return (
     <div
       onClick={(e) => props.onClose()}
-      className="fixed left-0 top-0 z-50 inset-0 bg-black bg-opacity-50 flex items-center justify-center"
+      className="fixed left-0 top-0 z-50 inset-0  bg-black bg-opacity-50 flex items-center justify-center"
     >
       <div
         onClick={(e) => {
           e.stopPropagation();
         }}
-        className="relative  p-4  max-w-fit max-h-full"
+        className="relative  p-4 w-180  max-h-full"
       >
         <div className="relative  bg-white  rounded-lg shadow dark:bg-gray-700">
           <div className="flex items-center justify-center  p-4 md:p-5 border-b rounded-t dark:border-gray-600">
             <h3 className="text-lg font-semibold text-gray-900  dark:text-white">
-              Declarer New Entree Stock
+              Create New Supplier
             </h3>
             <button
               onClick={() => props.onClose()}
@@ -77,108 +63,97 @@ const AddEntreeStockModal = (props: ModalProps) => {
             className="p-4 md:p-5"
           >
             <div className="grid gap-4 mb-4 grid-cols-12">
-              <div className="col-span-6 sm:col-span-6">
+              <div className="col-span-12">
                 <label
-                  htmlFor="quantite"
+                  htmlFor="name"
                   className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                 >
-                  Quantite
+                  Name
                 </label>
                 <input
-                  type="number"
-                  name="quantite"
-                  id="quantite"
+                  type="text"
+                  name="name"
+                  id="name"
                   className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                  placeholder="999"
+                  placeholder="Type Supplier name"
                   required
-                  value={FormsValues?.quantite || ""}
+                  value={FormsValues?.nom || ""}
                   onChange={(e) => {
                     setFormsValues((prev) => ({
                       ...prev,
-                      quantite: Number(e.target.value),
+                      nom: e.target.value,
                     }));
                   }}
                 />
               </div>
-              <div className="col-span-6 sm:col-span-6">
+              <div className="col-span-12">
                 <label
-                  htmlFor="date"
+                  htmlFor="name"
                   className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                 >
-                  Date
+                  Telephone
                 </label>
                 <input
-                  type="datetime-local"
-                  name="date"
-                  id="date"
+                  type="text"
+                  name="Telephone"
+                  id="Telephone"
                   className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                  placeholder="date"
+                  placeholder="Type Supplier Telephone"
                   required
-                  value={
-                    FormsValues?.date
-                      ? new Date(FormsValues.date).toISOString().slice(0, 16)
-                      : ""
-                  }
+                  value={FormsValues?.telephone || ""}
                   onChange={(e) => {
                     setFormsValues((prev) => ({
                       ...prev,
-                      date: new Date(e.target.value),
+                      telephone: e.target.value,
                     }));
-                    console.log(FormsValues.date);
                   }}
                 />
               </div>
-              <div className="col-span-6 sm:col-span-6">
+              <div className="col-span-12">
                 <label
-                  htmlFor="fournisseur"
+                  htmlFor="name"
                   className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                 >
-                  Fournisseur
+                  Adresse
                 </label>
-                <select
-                  value={FormsValues?.fournisseurId || ""}
+                <input
+                  type="text"
+                  name="Adresse"
+                  id="Adresse"
+                  className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                  placeholder="Type Supplier Adresse"
+                  required
+                  value={FormsValues?.adresse || ""}
                   onChange={(e) => {
                     setFormsValues((prev) => ({
                       ...prev,
-                      fournisseurId: Number(e.target.value), // Convert the value to a number
+                      adresse: e.target.value,
                     }));
                   }}
-                  id="fournisseur"
-                  className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                >
-                  <option>Select fournisseur</option>
-                  {Fournisseurs.map((fournisseur) => (
-                    <option key={fournisseur.id} value={fournisseur.id}>
-                      {fournisseur.nom}
-                    </option>
-                  ))}
-                </select>
+                />
               </div>
-              <div className="col-span-6 sm:col-span-6">
+              <div className="col-span-12">
                 <label
-                  htmlFor="article"
+                  htmlFor="name"
                   className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                 >
-                  Article
+                  Adresse
                 </label>
-                <select
-                  id="article"
-                  value={FormsValues?.articleId || ""}
+                <input
+                  type="text"
+                  name="email"
+                  id="email"
+                  className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                  placeholder="Type Supplier email"
+                  required
+                  value={FormsValues?.contact || ""}
                   onChange={(e) => {
                     setFormsValues((prev) => ({
                       ...prev,
-                      articleId: Number(e.target.value), // Convert the value to a number
+                      contact: e.target.value,
                     }));
                   }}
-                  className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                >
-                  <option value="">Select article</option>
-                  {Articles.map((article) => (
-                    <option key={article.id} value={article.id}>
-                      {article.nom}
-                    </option>
-                  ))}
-                </select>
+                />
               </div>
             </div>
             <button
@@ -197,7 +172,7 @@ const AddEntreeStockModal = (props: ModalProps) => {
                   clipRule="evenodd"
                 ></path>
               </svg>
-              Add new Entree
+              Add new Supplier
             </button>
           </form>
         </div>
@@ -206,4 +181,4 @@ const AddEntreeStockModal = (props: ModalProps) => {
   );
 };
 
-export default AddEntreeStockModal;
+export default AddSupplierModal;

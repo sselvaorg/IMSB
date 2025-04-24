@@ -1,11 +1,11 @@
 import React from "react";
-import { Fournisseur } from "../../helpers/declarations";
+import { Supplier } from "../../helpers/declarations";
 
 interface Props {
-  fournisseurs: Fournisseur[];
+  Suppliers: Supplier[];
 }
 
-const FournisseurTable = (props: Props) => {
+const SupplierTable = (props: Props) => {
   return (
     <div>
       <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
@@ -13,7 +13,7 @@ const FournisseurTable = (props: Props) => {
           <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
             <tr>
               <th scope="col" className="px-6 py-3">
-                Fournisseur
+                Supplier
               </th>
               <th scope="col" className="px-6 py-3">
                 adresse
@@ -27,19 +27,19 @@ const FournisseurTable = (props: Props) => {
             </tr>
           </thead>
           <tbody>
-            {props.fournisseurs.map((fournisseur) => (
+            {props.Suppliers.map((Supplier) => (
               <tr
-                key={fournisseur.id}
+                key={Supplier.id}
                 className="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700"
               >
                 <th
                   scope="row"
                   className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
                 >
-                  {fournisseur.nom}
+                  {Supplier.nom}
                 </th>
-                <td className="px-6 py-4"> {fournisseur.adresse}</td>
-                <td className="px-6 py-4"> {fournisseur.telephone}</td>
+                <td className="px-6 py-4"> {Supplier.adresse}</td>
+                <td className="px-6 py-4"> {Supplier.telephone}</td>
                 <td className="px-6 py-4">
                   <a
                     href="#"
@@ -57,4 +57,4 @@ const FournisseurTable = (props: Props) => {
   );
 };
 
-export default FournisseurTable;
+export default SupplierTable;

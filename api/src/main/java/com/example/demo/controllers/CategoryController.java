@@ -20,7 +20,7 @@ import com.example.demo.services.category.ICategoryService;
 @RestController
 @RequestMapping("/Api/Category/")
 public class CategoryController {
-    
+
     @Autowired
     private final ICategoryService categoryService;
 
@@ -28,9 +28,9 @@ public class CategoryController {
         this.categoryService = categoryService;
     }
 
-    @GetMapping("GetAllCategories")
-    public ResponseEntity<List<Category>> getAllCategories() {
-        return ResponseEntity.ok(categoryService.getAllCategories());
+    @GetMapping("GetAllCategorys")
+    public ResponseEntity<List<Category>> getAllCategorys() {
+        return ResponseEntity.ok(categoryService.getAllCategorys());
     }
 
     @GetMapping("GetCategoryById/{id}")
@@ -45,7 +45,7 @@ public class CategoryController {
 
     @PutMapping("UpdateCategory/{id}")
     public ResponseEntity<Category> updateCategory(@PathVariable("id") Long id,
-                                                   @RequestBody UpdateCategoryDto categoryDto) {
+            @RequestBody UpdateCategoryDto categoryDto) {
         return ResponseEntity.ok(categoryService.updateCategory(categoryDto, id));
     }
 }

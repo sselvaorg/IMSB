@@ -10,14 +10,14 @@ export const GetDashboardStats = async (): Promise<Stats | null> => {
 
     return reponse.data;
   } catch (error) {
-    console.error("Error in GetAllSortieStocks:", error);
+    console.error("Error in GetAllExitStocks:", error);
     return null;
   }
 };
-export const GetSortieProgress = async (): Promise<IOStockCharts[]> => {
+export const GetExitProgress = async (): Promise<IOStockCharts[]> => {
   try {
     const reponse = await axios.get<any>(
-      `${apiBase}/Api/Dashboard/GetSortieProgress`
+      `${apiBase}/Api/Dashboard/GetExitProgress`
     );
 
     return reponse.data;
@@ -26,7 +26,7 @@ export const GetSortieProgress = async (): Promise<IOStockCharts[]> => {
   }
 };
 
-export const GetEntreeProgress = async (): Promise<IOStockCharts[]> => {
+export const GetEntryProgress = async (): Promise<IOStockCharts[]> => {
   try {
     const reponse = await axios.get<any>(
       `${apiBase}/Api/Dashboard/GetEntriesProgress`

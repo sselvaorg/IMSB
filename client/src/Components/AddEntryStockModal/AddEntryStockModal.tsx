@@ -1,30 +1,34 @@
 import React, { useEffect, useState } from "react";
-import { Article } from "../../helpers/declarations";
+import { Article, Supplier } from "../../helpers/declarations";
 import { AllArticles } from "../../Services/ArticleService";
+import { AllSuppliers } from "../../Services/SupplierService";
 
 interface ModalProps {
   isOpen: boolean;
-  onClose: (data?: AddSortieStockDto) => void; // A function type that takes no arguments and returns void
+  onClose: (data?: AddEntryStockDto) => void; // A function type that takes no arguments and returns void
 }
-export interface AddSortieStockDto {
+export interface AddEntryStockDto {
   articleId: number;
-  destination: string;
+  SupplierId: number;
   quantite: number;
   date: Date;
 }
 
-const AddSortieStockModal = (props: ModalProps) => {
-  const [FormsValues, setFormsValues] = useState<AddSortieStockDto>({
+const AddEntryStockModal = (props: ModalProps) => {
+  const [FormsValues, setFormsValues] = useState<AddEntryStockDto>({
     date: new Date(),
     articleId: 0,
-    destination: "",
+    SupplierId: 0,
     quantite: 0,
   });
   const [Articles, setArticles] = useState<Article[]>([]);
+  const [Suppliers, setSuppliers] = useState<Supplier[]>([]);
   useEffect(() => {
     const GetEntrys = async () => {
       const articlesReponse = await AllArticles();
       setArticles(articlesReponse);
+      const SuppliersReponse = await AllSuppliers();
+      setSuppliers(SuppliersReponse);
     };
     GetEntrys();
   }, []);
@@ -42,7 +46,7 @@ const AddSortieStockModal = (props: ModalProps) => {
         <div className="relative  bg-white  rounded-lg shadow dark:bg-gray-700">
           <div className="flex items-center justify-center  p-4 md:p-5 border-b rounded-t dark:border-gray-600">
             <h3 className="text-lg font-semibold text-gray-900  dark:text-white">
-              Declarer New Sortie Stock
+              Declarer New Entry Stock
             </h3>
             <button
               onClick={() => props.onClose()}
@@ -78,7 +82,7 @@ const AddSortieStockModal = (props: ModalProps) => {
                   htmlFor="quantite"
                   className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                 >
-                  Quantite
+                  Quantity
                 </label>
                 <input
                   type="number"
@@ -120,31 +124,35 @@ const AddSortieStockModal = (props: ModalProps) => {
                       ...prev,
                       date: new Date(e.target.value),
                     }));
+                    console.log(FormsValues.date);
                   }}
                 />
               </div>
               <div className="col-span-6 sm:col-span-6">
                 <label
-                  htmlFor="destination"
+                  htmlFor="Supplier"
                   className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                 >
-                  Destination
+                  Supplier
                 </label>
-                <input
-                  type="text"
-                  name="destination"
-                  id="destination"
-                  className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                  placeholder="destination"
-                  required
-                  value={FormsValues?.destination}
+                <select
+                  value={FormsValues?.SupplierId || ""}
                   onChange={(e) => {
                     setFormsValues((prev) => ({
                       ...prev,
-                      destination: e.target.value,
+                      SupplierId: Number(e.target.value), // Convert the value to a number
                     }));
                   }}
-                />
+                  id="Supplier"
+                  className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                >
+                  <option>Select Supplier</option>
+                  {Suppliers.map((Supplier) => (
+                    <option key={Supplier.id} value={Supplier.id}>
+                      {Supplier.nom}
+                    </option>
+                  ))}
+                </select>
               </div>
               <div className="col-span-6 sm:col-span-6">
                 <label
@@ -189,7 +197,7 @@ const AddSortieStockModal = (props: ModalProps) => {
                   clipRule="evenodd"
                 ></path>
               </svg>
-              Add new Sortie
+              Add new Entry
             </button>
           </form>
         </div>
@@ -198,4 +206,4 @@ const AddSortieStockModal = (props: ModalProps) => {
   );
 };
 
-export default AddSortieStockModal;
+export default AddEntryStockModal;

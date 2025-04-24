@@ -1,4 +1,4 @@
-export interface Fournisseur {
+export interface Supplier {
   id: number;
   nom: string;
   contact: string;
@@ -6,7 +6,7 @@ export interface Fournisseur {
   telephone: string;
 }
 
-export interface Categorie {
+export interface Category {
   id: number;
   nom: string;
   description: string;
@@ -18,24 +18,24 @@ export interface Article {
   description: string;
   quantite: number;
   prix: number;
-  categorie: Categorie;
-  fournisseur: Fournisseur;
-  codeBarre: string;
+  categorie: Category;
+  Supplier: Supplier;
+  barcode: string;
 }
 
-export interface SortieStock {
+export interface ExitStock {
   id: number;
   article: Article;
   quantite: number;
   date: Date;
   destination: string;
 }
-export interface EntreeStock {
+export interface EntryStock {
   id: number;
   article: Article;
   quantite: number;
   date: Date;
-  fournisseur: Fournisseur;
+  Supplier: Supplier;
 }
 export interface IOStock {
   id: number;
@@ -46,9 +46,9 @@ export interface IOStock {
   intervenant: string;
 }
 export interface Stats {
-  nombreFournisseur: number;
+  nombreSupplier: number;
   nombreArticle: number;
-  nombreCategorie: number;
+  nombreCategory: number;
   stockEpuisee: number;
 }
 export interface Message {
@@ -68,5 +68,5 @@ export type UserProfile = {
 };
 export interface IOStockCharts {
   month: string;
-  totalQuantite: number;
+  totalQuantity: number;
 }

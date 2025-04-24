@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from "react";
-import CategorieTable from "../../Components/CategoryTable/CategorieTable";
-import { Categorie } from "../../helpers/declarations";
+import CategoryTable from "../../Components/CategoryTable/CategoryTable";
+import { Category } from "../../helpers/declarations";
 
 import AddCategoryModal, {
-  AddCategorieDto,
+  AddCategoryDto,
 } from "../../Components/AddCategoryModal/AddCategoryModal";
 import SuccessDialog from "../../Components/SuccessDialog/SuccessDialog";
 import ErrorDialog from "../../Components/ErrorDialog/ErrorDialog";
 import TableSkeleton from "../../Components/TableSkeleton/TableSkeleton";
-import { AllCategories, CreateCategory } from "../../Services/CategorieService";
+import { AllCategorys, CreateCategory } from "../../Services/CategoryService";
 import { showErrorModal, showSuccessModal } from "../../helpers/handlers";
 import NavBar from "../../Components/NavBar/NavBar";
 import SideNav from "../../Components/SideNav/SideNav";
@@ -16,33 +16,33 @@ import { useAuth } from "../../Contexts/useAuth";
 
 type Props = {};
 
-const CategoriePage = (props: Props) => {
+const CategoryPage = (props: Props) => {
   const [isModalOpen, setModalOpen] = useState<boolean>(false);
-  const [categories, setCategories] = useState<Categorie[]>([]);
+  const [categories, setCategorys] = useState<Category[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const { isLoggedIn } = useAuth();
   useEffect(() => {
-    const GetAllCategories = async () => {
+    const GetAllCategorys = async () => {
       try {
         setIsLoading(true); // Set loading to true before fetching
-        const results = await AllCategories();
-        setCategories(results);
+        const results = await AllCategorys();
+        setCategorys(results);
       } catch (error) {
         console.error("Failed to fetch categories:", error);
       } finally {
         setIsLoading(false); // Set loading to false after fetching
       }
     };
-    GetAllCategories();
+    GetAllCategorys();
   }, []);
-  const CloseModal = async (addCategorieDto?: AddCategorieDto) => {
+  const CloseModal = async (addCategoryDto?: AddCategoryDto) => {
     setModalOpen(false);
-    if (addCategorieDto) {
-      console.log(addCategorieDto);
+    if (addCategoryDto) {
+      console.log(addCategoryDto);
       try {
-        const reponse = await CreateCategory(addCategorieDto);
+        const reponse = await CreateCategory(addCategoryDto);
         if (reponse) {
-          setCategories([...categories, reponse]);
+          setCategorys([...categories, reponse]);
           showSuccessModal();
         } else {
           showErrorModal();
@@ -64,13 +64,13 @@ const CategoriePage = (props: Props) => {
               onClick={(e) => setModalOpen(true)}
               className="bg-blue-500 hover:bg-blue-700 text-white px-3 py-2 font-medium rounded"
             >
-              Ajouter Categorie
+              Ajouter Category
             </button>
           </div>
           {isLoading ? (
             <TableSkeleton isLoading={isLoading}></TableSkeleton>
           ) : (
-            <CategorieTable categories={categories}></CategorieTable>
+            <CategoryTable categories={categories}></CategoryTable>
           )}
         </div>
       </div>
@@ -86,4 +86,4 @@ const CategoriePage = (props: Props) => {
   );
 };
 
-export default CategoriePage;
+export default CategoryPage;

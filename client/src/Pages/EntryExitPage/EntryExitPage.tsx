@@ -1,19 +1,19 @@
 import React, { useEffect, useState } from "react";
 import FluxTable from "../../Components/FluxTable/FluxTable";
-import { EntreeStock, IOStock, SortieStock } from "../../helpers/declarations";
+import { EntryStock, IOStock, ExitStock } from "../../helpers/declarations";
 
 import SuccessDialog from "../../Components/SuccessDialog/SuccessDialog";
 import ErrorDialog from "../../Components/ErrorDialog/ErrorDialog";
-import AddEntreeStockModal, {
-  AddEntreeStockDto,
-} from "../../Components/AddEntreeStockModal/AddEntreeStockModal";
-import AddSortieStockModal, {
-  AddSortieStockDto,
-} from "../../Components/AddSortieStockModal/AddSortieStockModal";
+import AddEntryStockModal, {
+  AddEntryStockDto,
+} from "../../Components/AddEntryStockModal/AddEntryStockModal";
+import AddExitStockModal, {
+  AddExitStockDto,
+} from "../../Components/AddExitStockModal/AddExitStockModal";
 import TableSkeleton from "../../Components/TableSkeleton/TableSkeleton";
 import {
-  CreateEntreeStock,
-  CreateSortieStock,
+  CreateEntryStock,
+  CreateExitStock,
   GetAllIOStock,
 } from "../../Services/IOService";
 import { showErrorModal, showSuccessModal } from "../../helpers/handlers";
@@ -23,31 +23,31 @@ import { useAuth } from "../../Contexts/useAuth";
 
 type Props = {};
 
-const EntreeSortiePage = (props: Props) => {
-  const EntreeToStock = (source: EntreeStock): IOStock => {
+const EntryExitPage = (props: Props) => {
+  const EntryToStock = (source: EntryStock): IOStock => {
     return {
       article: source.article.nom,
       date: source.date,
       id: source.id,
-      type: "Entree",
-      intervenant: source.fournisseur.nom,
+      type: "Entry",
+      intervenant: source.Supplier.nom,
       quantite: source.quantite,
     };
   };
-  const SortieToStock = (source: SortieStock): IOStock => {
+  const ExitToStock = (source: ExitStock): IOStock => {
     return {
       article: source.article.nom,
       date: source.date,
       id: source.id,
-      type: "Sortie",
+      type: "Exit",
       intervenant: source.destination,
       quantite: source.quantite,
     };
   };
   const [ioStock, setIoStock] = useState<IOStock[]>([]);
   const { isLoggedIn } = useAuth();
-  const [isEntreeModalOpen, setEntreeModalOpen] = useState<boolean>(false);
-  const [isSortieModalOpen, setSortieModalOpen] = useState<boolean>(false);
+  const [isEntryModalOpen, setEntryModalOpen] = useState<boolean>(false);
+  const [isExitModalOpen, setExitModalOpen] = useState<boolean>(false);
   const [isLoading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
@@ -60,57 +60,57 @@ const EntreeSortiePage = (props: Props) => {
 
     GetAllIoOperations();
   }, []);
-  const CloseEntree = async (data?: AddEntreeStockDto) => {
+  const CloseEntry = async (data?: AddEntryStockDto) => {
     try {
-      setEntreeModalOpen(false);
+      setEntryModalOpen(false);
       console.log("Data:", data); // Log data to verify its content
       if (data) {
-        const reponse = await CreateEntreeStock(data);
+        const reponse = await CreateEntryStock(data);
 
         console.log("Response:", reponse); // Log response to ensure it's valid
 
         if (reponse != null) {
           setIoStock(
-            [...ioStock, EntreeToStock(reponse)].sort(
+            [...ioStock, EntryToStock(reponse)].sort(
               (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
             )
           );
           showSuccessModal();
         } else {
-          throw new Error("Invalid response from CreateEntreeStock"); // Handle unexpected response
+          throw new Error("Invalid response from CreateEntryStock"); // Handle unexpected response
         }
       } else {
       }
     } catch (error) {
       console.error("Error:", error); // Log error to debug
-      setEntreeModalOpen(false);
+      setEntryModalOpen(false);
       showErrorModal();
     }
   };
-  const CloseSortie = async (data?: AddSortieStockDto) => {
+  const CloseExit = async (data?: AddExitStockDto) => {
     try {
-      setSortieModalOpen(false);
+      setExitModalOpen(false);
       console.log("Data:", data); // Log data to verify its content
       if (data) {
-        const reponse = await CreateSortieStock(data);
+        const reponse = await CreateExitStock(data);
 
         console.log("Response:", reponse); // Log response to ensure it's valid
 
         if (reponse != null) {
           setIoStock(
-            [...ioStock, SortieToStock(reponse)].sort(
+            [...ioStock, ExitToStock(reponse)].sort(
               (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
             )
           );
           showSuccessModal();
         } else {
-          throw new Error("Invalid response from CreateSortieStock"); // Handle unexpected response
+          throw new Error("Invalid response from CreateExitStock"); // Handle unexpected response
         }
       } else {
       }
     } catch (error) {
       console.error("Error:", error); // Log error to debug
-      setSortieModalOpen(false);
+      setExitModalOpen(false);
       showErrorModal();
     }
   };
@@ -123,19 +123,19 @@ const EntreeSortiePage = (props: Props) => {
           <div className="flex justify-end gap-5 items-center py-4 container mx-auto">
             <button
               onClick={(e) => {
-                setEntreeModalOpen(true);
+                setEntryModalOpen(true);
               }}
               className="bg-green-500 hover:bg-green-700 text-white px-3 py-2 font-medium rounded"
             >
-              Signaler Entree
+              Signaler Entry
             </button>
             <button
               onClick={(e) => {
-                setSortieModalOpen(true);
+                setExitModalOpen(true);
               }}
               className="bg-red-500 hover:bg-red-700 text-white px-3 py-2 font-medium rounded"
             >
-              Signaler Sortie
+              Signaler Exit
             </button>
           </div>
           {isLoading ? (
@@ -151,20 +151,20 @@ const EntreeSortiePage = (props: Props) => {
       {showError && (
         <ErrorDialog onClose={() => setShowError(false)}></ErrorDialog>
       )} */}
-      {isEntreeModalOpen && (
-        <AddEntreeStockModal
-          isOpen={isEntreeModalOpen}
-          onClose={CloseEntree}
-        ></AddEntreeStockModal>
+      {isEntryModalOpen && (
+        <AddEntryStockModal
+          isOpen={isEntryModalOpen}
+          onClose={CloseEntry}
+        ></AddEntryStockModal>
       )}
-      {isSortieModalOpen && (
-        <AddSortieStockModal
-          isOpen={isSortieModalOpen}
-          onClose={CloseSortie}
-        ></AddSortieStockModal>
+      {isExitModalOpen && (
+        <AddExitStockModal
+          isOpen={isExitModalOpen}
+          onClose={CloseExit}
+        ></AddExitStockModal>
       )}
     </div>
   );
 };
 
-export default EntreeSortiePage;
+export default EntryExitPage;

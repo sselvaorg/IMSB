@@ -2,15 +2,15 @@ import React, { useState } from "react";
 
 interface ModalProps {
   isOpen: boolean;
-  onClose: (data?: AddCategorieDto) => void; // A function type that takes no arguments and returns void
+  onClose: (data?: AddCategoryDto) => void; // A function type that takes no arguments and returns void
 }
-export interface AddCategorieDto {
+export interface AddCategoryDto {
   nom: string;
   description?: string;
 }
 
 const AddCategoryModal = (props: ModalProps) => {
-  const [FormsValues, setFormsValues] = useState<AddCategorieDto>({
+  const [FormsValues, setFormsValues] = useState<AddCategoryDto>({
     nom: "",
     description: "",
   });
@@ -28,7 +28,7 @@ const AddCategoryModal = (props: ModalProps) => {
         <div className="relative  bg-white  rounded-lg shadow dark:bg-gray-700">
           <div className="flex items-center justify-center  p-4 md:p-5 border-b rounded-t dark:border-gray-600">
             <h3 className="text-lg font-semibold text-gray-900  dark:text-white">
-              Create New Categorie
+              Create New Category
             </h3>
             <button
               onClick={() => props.onClose()}
@@ -120,7 +120,7 @@ const AddCategoryModal = (props: ModalProps) => {
                   clipRule="evenodd"
                 ></path>
               </svg>
-              Add new Categorie
+              Add new Category
             </button>
           </form>
         </div>

@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { Categorie, Fournisseur } from "../../helpers/declarations";
+import { Category, Supplier } from "../../helpers/declarations";
 import { BarcodeScanner } from "@thewirv/react-barcode-scanner";
-import { AllCategories } from "../../Services/CategorieService";
-import { AllFournisseurs } from "../../Services/FournisseurService";
+import { AllCategorys } from "../../Services/CategoryService";
+import { AllSuppliers } from "../../Services/SupplierService";
 interface ModalProps {
   isOpen: boolean;
   onClose: (data?: AddArticleDto) => void; // A function type that takes no arguments and returns void
@@ -11,10 +11,10 @@ export interface AddArticleDto {
   nom: string;
   description?: string;
   categoryId: number;
-  fournisseurId: number;
+  SupplierId: number;
   prix: number;
   quantite: number;
-  codeBarre: string;
+  barcode: string;
 }
 const AddArticleModal = (props: ModalProps) => {
   // const handleScan = (data: string) => {
@@ -22,7 +22,7 @@ const AddArticleModal = (props: ModalProps) => {
   //     console.log(data);
   //     setFormsValues((prev) => ({
   //       ...prev,
-  //       codeBarre: data,
+  //       barcode: data,
   //     }));
   //   }
   // };
@@ -35,19 +35,19 @@ const AddArticleModal = (props: ModalProps) => {
     nom: "",
     description: "",
     categoryId: 0,
-    fournisseurId: 0,
+    SupplierId: 0,
     prix: 0,
     quantite: 0,
-    codeBarre: "",
+    barcode: "",
   });
-  const [Categories, setCategories] = useState<Categorie[]>([]);
-  const [Fournisseurs, setFournisseurs] = useState<Fournisseur[]>([]);
+  const [Categorys, setCategorys] = useState<Category[]>([]);
+  const [Suppliers, setSuppliers] = useState<Supplier[]>([]);
   useEffect(() => {
     const GetEntrys = async () => {
-      const categoriesReponse = await AllCategories();
-      setCategories(categoriesReponse);
-      const fournisseursReponse = await AllFournisseurs();
-      setFournisseurs(fournisseursReponse);
+      const categoriesReponse = await AllCategorys();
+      setCategorys(categoriesReponse);
+      const SuppliersReponse = await AllSuppliers();
+      setSuppliers(SuppliersReponse);
     };
     GetEntrys();
   }, []);
@@ -125,7 +125,7 @@ const AddArticleModal = (props: ModalProps) => {
                   htmlFor="quantite"
                   className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                 >
-                  Quantite
+                  Quantity
                 </label>
                 <input
                   type="number"
@@ -168,26 +168,26 @@ const AddArticleModal = (props: ModalProps) => {
               </div>
               <div className="col-span-6 sm:col-span-6">
                 <label
-                  htmlFor="fournisseur"
+                  htmlFor="Supplier"
                   className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                 >
-                  Fournisseur
+                  Supplier
                 </label>
                 <select
-                  value={FormsValues?.fournisseurId || ""}
+                  value={FormsValues?.SupplierId || ""}
                   onChange={(e) => {
                     setFormsValues((prev) => ({
                       ...prev,
-                      fournisseurId: Number(e.target.value), // Convert the value to a number
+                      SupplierId: Number(e.target.value), // Convert the value to a number
                     }));
                   }}
-                  id="fournisseur"
+                  id="Supplier"
                   className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                 >
-                  <option>Select fournisseur</option>
-                  {Fournisseurs.map((fournisseur) => (
-                    <option key={fournisseur.id} value={fournisseur.id}>
-                      {fournisseur.nom}
+                  <option>Select Supplier</option>
+                  {Suppliers.map((Supplier) => (
+                    <option key={Supplier.id} value={Supplier.id}>
+                      {Supplier.nom}
                     </option>
                   ))}
                 </select>
@@ -211,7 +211,7 @@ const AddArticleModal = (props: ModalProps) => {
                   className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                 >
                   <option value="">Select category</option>
-                  {Categories.map((categorie) => (
+                  {Categorys.map((categorie) => (
                     <option key={categorie.id} value={categorie.id}>
                       {categorie.nom}
                     </option>
@@ -240,33 +240,33 @@ const AddArticleModal = (props: ModalProps) => {
               </div>
               <div className="col-span-12">
                 <label
-                  htmlFor="codeBarre"
+                  htmlFor="barcode"
                   className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                 >
-                  CodeBarre
+                  Barcode
                 </label>
                 <input
                   type="text"
                   name="name"
                   id="name"
                   className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                  placeholder="Type  codeBarre"
+                  placeholder="Type  barcode"
                   required
-                  value={FormsValues?.codeBarre || ""}
+                  value={FormsValues?.barcode || ""}
                   onChange={(e) => {
                     setFormsValues((prev) => ({
                       ...prev,
-                      codeBarre: e.target.value,
+                      barcode: e.target.value,
                     }));
                   }}
                 />
               </div>
               {/* <div className="col-span-3">
                 <label
-                  htmlFor="codeBarre"
+                  htmlFor="barcode"
                   className="block mb-2 align-top text-sm font-medium text-gray-900 dark:text-white"
                 >
-                  CodeBarre
+                  Barcode
                 </label>
                 <BarcodeScanner
 
