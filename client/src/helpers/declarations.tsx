@@ -46,16 +46,16 @@ export interface IOStock {
   intervenant: string;
 }
 export interface Stats {
-  namebreSupplier: number;
-  namebreArticle: number;
-  namebreCategory: number;
-  stockEpuisee: number;
+  numberOfSuppliers: number;
+  numberOfArticles: number;
+  numberOfCategorys: number;
+  outOfStock: number;
 }
 export interface Message {
   id: number;
   content: string;
   title: string;
-  isRead: boolean;
+  read: boolean;
   createdAt: Date;
 }
 export interface AuthToken {

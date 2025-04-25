@@ -15,6 +15,7 @@ const InboxPage = (props: Props) => {
   const fetchMessages = async () => {
     setLoading(true);
     const data = await GetAllMessages();
+    console.log(data);
     setMessages(data);
     setLoading(false);
   };
@@ -43,20 +44,20 @@ const InboxPage = (props: Props) => {
         ) : messages.length === 0 ? (
           <p className="text-2xl font-bold bg-gradient-to-r from-[#08D6DA] to-[#9DF8FA] bg-clip-text text-transparent" >No messages found.</p>
         ) : (
-          <ul className="space-y-4 bg-gradient-to-r from-[#08D6DA] to-[#9DF8FA] ">
+          <ul className="space-y-4  ">
             {messages.map((msg) => (
               <li
                 key={msg.id}
                 className={`p-4 rounded-xl shadow-md ${
-                  msg.isRead ? "bg-gradient-to-r from-[#08D6DA] to-[#9DF8FA]" : "bg-gradient-to-r from-[#08D6DA] to-[#9DF8FA]"
+                  msg.read ? "bg-gradient-to-r from-[#08D6DA] to-[#9DF8FA]" : ""
                 }`}
               >
                 <div className="flex justify-between items-center">
                   <div>
-                    <h4 className="text-3xl font-bold bg-gradient-to-r from-[#08D6DA] to-[#9DF8FA] bg-clip-text text-transparent">{msg.title}</h4>
-                    <p className=" text-gray-600 text-3xl font-bold bg-gradient-to-r from-[#08D6DA] to-[#9DF8FA] bg-clip-text text-transparent">{msg.content}</p>
+                    <h4 className="text-2xl font-bold bg-gradient-to-r from-[#08D6DA] to-[#9DF8FA] text-black bg-clip-text ">Title : {msg.title}</h4>
+                    <p className="  text-2xl font-bold bg-gradient-to-r from-[#08D6DA] to-[#9DF8FA] text-black bg-clip-text ">Message : {msg.content}</p>
                   </div>
-                  {!msg.isRead && (
+                  {!msg.read && (
                     <button
                       onClick={() => handleMarkAsRead(msg.id)}
                       className="px-4 py-2 bg-blue-500 text-white rounded-xl hover:bg-blue-600 transition"

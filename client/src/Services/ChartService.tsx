@@ -7,7 +7,7 @@ export const GetDashboardStats = async (): Promise<Stats | null> => {
     const reponse = await axios.get<any>(
       `${apiBase}/Api/Dashboard/GetDashboardStats`
     );
-
+    console.log(reponse);
     return reponse.data;
   } catch (error) {
     console.error("Error in GetAllStockExits:", error);

@@ -12,8 +12,8 @@ const ProtectedRoutes = (props: Props) => {
   return isLoggedIn() ? (
     <>{props.children}</>
   ) : (
-    // <Navigate to={"/login"} state={{ from: location }} replace></Navigate>
-    <>{props.children}</>
+    <Navigate to={"/login"} state={{ from: location }} replace></Navigate>
+    // <>{props.children}</>
   );
 };
 

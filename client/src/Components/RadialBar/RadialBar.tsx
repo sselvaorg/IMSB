@@ -14,7 +14,8 @@ const RadialBar = (props: Props) => {
       reponse.forEach((element) => {
         charts += element.quantity;
       });
-      setChart([(charts / 5000) | 0]);
+      console.log(charts)
+      setChart([(charts / 500) ]);
     };
     GetArticles();
   }, []);

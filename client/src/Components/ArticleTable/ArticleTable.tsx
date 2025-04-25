@@ -27,9 +27,9 @@ const ArticleTable = (props: Props) => {
               <th scope="col" className="px-6 py-3">
                 Quantity
               </th>
-              <th scope="col" className="px-6 py-3">
+              {/* <th scope="col" className="px-6 py-3">
                 Action
-              </th>
+              </th> */}
             </tr>
           </thead>
           <tbody>
@@ -48,14 +48,14 @@ const ArticleTable = (props: Props) => {
                 <td className="px-6 py-4 text-black ">{article.supplier?.name}</td>
                 <td className="px-6 py-4 text-black ">Rs.{article.price}</td>
                 <td className="px-6 py-4 text-black ">{article.quantity}</td>
-                <td className="px-6 py-4 text-black ">
+                {/* <td className="px-6 py-4 text-black ">
                   <a
                     href="#"
                     className="font-medium text-blue-600 dark:text-blue-500 hover:underline"
                   >
                     Edit
                   </a>
-                </td>
+                </td> */}
               </tr>
             ))}
           </tbody>

@@ -19,9 +19,9 @@ const CategoryTable = (props: Props) => {
               <th scope="col" className="px-6 py-3">
                 Description
               </th>
-              <th scope="col" className="px-6 py-3">
+              {/* <th scope="col" className="px-6 py-3">
                 Action
-              </th>
+              </th> */}
             </tr>
           </thead>
           <tbody>
@@ -39,14 +39,14 @@ const CategoryTable = (props: Props) => {
                 <td className="px-6 py-4">
                   {truncateText(category.description, 100)}
                 </td>
-                <td className="px-6 py-4">
+                {/* <td className="px-6 py-4">
                   <a
                     href="#"
                     className="font-medium text-blue-600 dark:text-blue-500 hover:underline"
                   >
                     Edit
                   </a>
-                </td>
+                </td> */}
               </tr>
             ))}
           </tbody>

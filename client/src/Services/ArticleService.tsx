@@ -8,6 +8,7 @@ export const AllArticles = async (): Promise<Article[]> => {
     const response = await axios.get<any>(
       `${apiBase}/Api/Article/GetAllArticles`
     );
+    console.log(response);
 
     return response.data;
   } catch (error) {

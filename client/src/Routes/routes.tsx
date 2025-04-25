@@ -15,7 +15,14 @@ export const routes = createBrowserRouter([
     path: "/",
     element: <App></App>,
     children: [
-      { path: "", element: <DashboardPage></DashboardPage> },
+      {
+        path: "",
+        element: (
+          <ProtectedRoutes>
+            <DashboardPage></DashboardPage>
+          </ProtectedRoutes>
+        ),
+      },
       {
         path: "/stock",
         element: (

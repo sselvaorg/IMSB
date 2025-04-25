@@ -54,7 +54,7 @@ const DashboardPage = (props: Props) => {
                   />
                 </svg>
               }
-              value={stats?.namebreArticle}
+              value={stats?.numberOfArticles}
               label="Articles"
             />
           )}
@@ -81,7 +81,7 @@ const DashboardPage = (props: Props) => {
                   />
                 </svg>
               }
-              value={stats?.namebreSupplier}
+              value={stats?.numberOfSuppliers}
               label="Suppliers"
             />
           )}
@@ -110,7 +110,7 @@ const DashboardPage = (props: Props) => {
                   />
                 </svg>
               }
-              value={stats?.stockEpuisee}
+              value={stats?.outOfStock}
               label="Out of Stock"
             />
           )}
@@ -137,7 +137,7 @@ const DashboardPage = (props: Props) => {
                   />
                 </svg>
               }
-              value={stats?.namebreCategory}
+              value={stats?.numberOfCategorys}
               label="Categorys"
             />
           )}
