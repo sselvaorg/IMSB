@@ -9,7 +9,7 @@ const NavBar = (props: Props) => {
     <div className="bg-[#171717]" >
       <nav className=" border-gray-200 dark:bg-gray-900">
         <div className="flex flex-wrap justify-between items-center mx-auto max-w-screen-xl p-4">
-        <h1 className="text-4xl font-bold bg-gradient-to-r from-[#08D6DA] to-[#9DF8FA] bg-clip-text text-transparent">
+        <h1 className="text-4xl font-bold bg-gradient-to-r from-[#08D6DA] to-[#9DF8FA] bg-clip-text text-transparent font-sans">
   Over Flow
 </h1>
 

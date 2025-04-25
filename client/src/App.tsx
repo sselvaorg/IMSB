@@ -14,14 +14,10 @@ function App() {
     <div className="App">
       <UserProvider>
         <div className="h-full flex">
-          {/* SideNav appears outside the border container */}
           <div className="w-64 h-screen">
             <SideNav />
           </div>
-          
-          {/* Content area with completely revised border effect */}
           <div className="relative flex-1 min-h-lvh">
-            {/* Border container using linear gradients as background */}
             <div className="absolute inset-0 rounded-3xl" 
                  style={{
                    background: `
@@ -31,8 +27,6 @@ function App() {
                    `
                  }}>
             </div>
-            
-            {/* Inner content container */}
             <div className="absolute inset-[10px] rounded-3xl bg-[#171717]">
               <Outlet />
             </div>
