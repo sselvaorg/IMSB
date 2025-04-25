@@ -50,7 +50,7 @@ const SupplierPage = (props: Props) => {
   }, []);
 
   return (
-    <div className={`w-full m-0 ${isLoggedIn() ? "ps-64" : "p-0"}`}>
+    <div className={`w-full m-0 bg-[#171717] ${isLoggedIn() ? "ps-0" : "p-0"}`}>
       {isLoggedIn() ? <SideNav></SideNav> : <></>}
       <NavBar></NavBar>
       <div className="pt-36 px-2">

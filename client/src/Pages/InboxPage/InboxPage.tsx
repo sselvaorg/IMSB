@@ -33,28 +33,28 @@ const InboxPage = (props: Props) => {
   }, []);
 
   return (
-    <div className={`w-full min-h-screen ${isLoggedIn() ? "ps-64" : "p-0"}`}>
+    <div className={`w-full min-h-screen ${isLoggedIn() ? "ps-0" : "p-0"}`}>
       {isLoggedIn() && <SideNav />}
       <NavBar />
       <div className="p-6">
-        <h2 className="text-2xl font-semibold mb-4">Inbox</h2>
+        <h2 className=" mb-4 text-3xl font-bold bg-gradient-to-r from-[#08D6DA] to-[#9DF8FA] bg-clip-text text-transparent">Inbox</h2>
         {loading ? (
           <p>Loading messages...</p>
         ) : messages.length === 0 ? (
-          <p>No messages found.</p>
+          <p className="text-2xl font-bold bg-gradient-to-r from-[#08D6DA] to-[#9DF8FA] bg-clip-text text-transparent" >No messages found.</p>
         ) : (
-          <ul className="space-y-4">
+          <ul className="space-y-4 bg-gradient-to-r from-[#08D6DA] to-[#9DF8FA] ">
             {messages.map((msg) => (
               <li
                 key={msg.id}
                 className={`p-4 rounded-xl shadow-md ${
-                  msg.isRead ? "bg-gray-200" : "bg-white"
+                  msg.isRead ? "bg-gradient-to-r from-[#08D6DA] to-[#9DF8FA]" : "bg-gradient-to-r from-[#08D6DA] to-[#9DF8FA]"
                 }`}
               >
                 <div className="flex justify-between items-center">
                   <div>
-                    <h4 className="font-bold">{msg.title}</h4>
-                    <p className="text-sm text-gray-600">{msg.content}</p>
+                    <h4 className="text-3xl font-bold bg-gradient-to-r from-[#08D6DA] to-[#9DF8FA] bg-clip-text text-transparent">{msg.title}</h4>
+                    <p className=" text-gray-600 text-3xl font-bold bg-gradient-to-r from-[#08D6DA] to-[#9DF8FA] bg-clip-text text-transparent">{msg.content}</p>
                   </div>
                   {!msg.isRead && (
                     <button

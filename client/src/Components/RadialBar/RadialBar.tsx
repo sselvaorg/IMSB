@@ -68,7 +68,7 @@ const RadialBar = (props: Props) => {
           options={options}
           series={Chart}
           type="radialBar"
-          height={250}
+          height={250} className=" bg-gradient-to-r from-[#08D6DA] to-[#9DF8FA] text-black rounded-lg"
         />
       </div>
       <div id="html-dist"></div>

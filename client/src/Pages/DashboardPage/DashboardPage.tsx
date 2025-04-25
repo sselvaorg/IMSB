@@ -27,10 +27,12 @@ const DashboardPage = (props: Props) => {
   }, []);
 
   return (
-    <div className={`w-full m-0 ${isLoggedIn() ? "ps-64" : "p-0"}`}>
+    // <div className="relative min-h-screen">
+    
+    <div className={`w-full bg-[#171717] m-0 ${isLoggedIn() ? "ps-0" : "p-0"}`}>
       {isLoggedIn() && <SideNav />}
       <NavBar />
-      <div className="container contain-content mx-auto max-w-full grid grid-cols-12 justify-center">
+      <div className="container contain-content mx-auto max-w-full grid grid-cols-12 justify-center bg-[#171717]">
         {/* Articles */}
         <div className="p-3 col-span-3">
           {isLoading ? (
@@ -114,7 +116,7 @@ const DashboardPage = (props: Props) => {
           )}
         </div>
 
-        {/* Categorys */}
+        {/* Categories */}
         <div className="p-3 col-span-3">
           {isLoading ? (
             <ItemSkeleton isLoading={isLoading} />
@@ -148,15 +150,17 @@ const DashboardPage = (props: Props) => {
           </div>
         </div>
         <div className="px-3 col-span-4 flex justify-center flex-col gap-3 aspect-video">
-          <div className="bg-white px-3 py-2 rounded-lg flex items-center">
+          <div className=" px-3 py-2 rounded-lg flex items-center">
             <PieCharts />
           </div>
-          <div className="bg-white px-3 rounded-lg flex items-start h-max">
+          <div className=" px-3 rounded-lg flex items-start h-max">
             <RadialBar />
           </div>
         </div>
       </div>
-    </div>
+      </div>
+      // </div>  
+     
   );
 };
 

@@ -80,6 +80,8 @@ const AreaCharts = (props: Props) => {
           series={series}
           type="area"
           height={350}
+         
+          className=" bg-gradient-to-r from-[#08D6DA] to-[#9DF8FA] text-black rounded-lg"
         />
       </div>
     </div>
